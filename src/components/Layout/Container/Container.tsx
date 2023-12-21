@@ -13,7 +13,7 @@ export function Container({ children }: ContainerProps) {
     <div className="flex flex-col md:flex-row relative">
       <Navbar opened={opened} setOpened={setOpened} />
       <Header setOpened={setOpened} />
-      <main className="p-4 h-screen max-w-[1600px] mx-auto">{children}</main>
+      <main className="h-screen max-w-[1600px] w-[1600px] mx-auto">{children}</main>
     </div>
   );
 }

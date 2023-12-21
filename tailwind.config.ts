@@ -19,6 +19,7 @@ const config: Config = {
         contrast: 'var(--contrast)',
         white: 'var(--white)',
         bg: 'var(--bg)',
+        'bg-contrast': 'var(--bg-contrast)',
       },
     },
   },

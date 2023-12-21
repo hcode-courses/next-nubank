@@ -1,6 +1,14 @@
 'use client';
 
-import { IconGraphFilled, IconX } from '@tabler/icons-react';
+import {
+  IconCoin,
+  IconGraph,
+  IconMessage,
+  IconSettings,
+  IconShieldLock,
+  IconUserCircle,
+  IconX,
+} from '@tabler/icons-react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { UserCard } from '../UserCard';
@@ -14,32 +22,32 @@ type NavbarProps = {
 const navBarData = [
   {
     text: 'Dashboard',
-    icon: <IconGraphFilled />,
+    icon: <IconGraph />,
     link: '/',
   },
   {
     text: 'Conta',
-    icon: <IconGraphFilled />,
+    icon: <IconUserCircle />,
     link: '/account',
   },
   {
     text: 'Transações',
-    icon: <IconGraphFilled />,
+    icon: <IconCoin />,
     link: '/transactions',
   },
   {
     text: 'Chat Online',
-    icon: <IconGraphFilled />,
+    icon: <IconMessage />,
     link: '/chat',
   },
   {
     text: 'Configurações',
-    icon: <IconGraphFilled />,
+    icon: <IconSettings />,
     link: '/settings',
   },
   {
     text: 'Security',
-    icon: <IconGraphFilled />,
+    icon: <IconShieldLock />,
     link: '/security',
   },
 ];
@@ -49,9 +57,9 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
 
   return (
     <nav
-      className={`flex flex-col shadow-md justify-between bg-primary w-[300px] py-20 fixed md:static h-screen text-white left-[${
-        opened ? '0' : '-300px'
-      }]`}
+      className={`flex flex-col shadow-md justify-between bg-primary w-[300px] py-20 fixed md:static h-screen text-white ${
+        opened ? 'left-[0]' : 'left-[-300px]'
+      }`}
     >
       <div>
         <IconX
@@ -61,7 +69,7 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
           cursor="pointer"
           onClick={() => {
             console.log(opened);
-            setOpened(!opened);
+            setOpened(false);
           }}
         />
         <div className="mb-28">
@@ -81,7 +89,7 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
         </div>
       </div>
 
-      <div className="p-4 text-sm">
+      <div className="flex flex-col items-center p-4 text-sm">
         <Image
           className="mb-4"
           src="/icons/hcode_logo.svg"
@@ -89,7 +97,7 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
           width={70}
           height={70}
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <span>&#169; 2023 Hcode Banco</span>
           <span>Todos os direitos reservados</span>
         </div>
