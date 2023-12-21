@@ -46,7 +46,7 @@ const navBarData = [
     link: '/settings',
   },
   {
-    text: 'Security',
+    text: 'Segurança',
     icon: <IconShieldLock />,
     link: '/security',
   },
@@ -90,13 +90,7 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
       </div>
 
       <div className="flex flex-col items-center p-4 text-sm">
-        <Image
-          className="mb-4"
-          src="/icons/hcode_logo.svg"
-          alt="Avatar"
-          width={70}
-          height={70}
-        />
+        <Image className="mb-4" src="/icons/hcode_logo.svg" alt="Avatar" width={70} height={70} />
         <div className="flex flex-col items-center">
           <span>&#169; 2023 Hcode Banco</span>
           <span>Todos os direitos reservados</span>
