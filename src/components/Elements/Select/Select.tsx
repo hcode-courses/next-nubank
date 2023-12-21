@@ -21,6 +21,7 @@ export function Select({ data, active, setActive }: SelectProps) {
 
     return (
       <div
+        key={`select-${item.value}`}
         className="flex flex-row justify-between p-2 hover:cursor-pointer"
         onClick={() => {
           setActive(item);

@@ -16,6 +16,7 @@ export function Tabs({ data, active, setActive, className }: TabProps) {
     const isActive = active == item.value;
     return (
       <button
+        key={`tab-${item.value}`}
         className={`flex flex-col items-center font-medium w-full`}
         onClick={() => setActive(item.value)}
       >
