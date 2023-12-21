@@ -7,7 +7,9 @@
   --secondary: #8a05be;
   --tertiary: #530082;
   --text: #191919;
+  --text-contrast: #fff;
   --bg: #f5f5f5;
+  --white: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,11 +18,15 @@
     --secondary: #8a05be;
     --tertiary: #530082;
     --text: #191919;
+    --text-contrast: #fff;
     --bg: #f5f5f5;
+    --white: #fff;
   }
 }
 
 body {
   background: var(--bg);
   color: var(--text);
+  font-family: 'Inter';
+  font-weight: 300;
 }

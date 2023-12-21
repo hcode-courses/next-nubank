@@ -17,6 +17,8 @@ const config: Config = {
         tertiary: 'var(--tertiary)',
         text: 'var(--text)',
         contrast: 'var(--contrast)',
+        white: 'var(--white)',
+        bg: 'var(--bg)',
       },
     },
   },
