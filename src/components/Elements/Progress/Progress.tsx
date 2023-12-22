@@ -28,8 +28,6 @@ export function Progress({ data, className }: ProgressProps) {
     const backgroundColor = `var(-${item.color.replace('text', '')})`;
     const zIndex = data.length - index - 1;
 
-    console.log(accSectionsHeight);
-
     accSectionsHeight += (item.value / total) * parentHeight;
     return (
       <div

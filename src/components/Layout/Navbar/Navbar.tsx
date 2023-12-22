@@ -68,7 +68,6 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
           className="md:hidden absolute top-4 left-8"
           cursor="pointer"
           onClick={() => {
-            console.log(opened);
             setOpened(false);
           }}
         />
