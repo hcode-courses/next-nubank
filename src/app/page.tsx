@@ -2,71 +2,11 @@
 
 import { Button, CreditCard } from '@/components/Elements';
 import { HomeInfoSection } from '@/components/Layout';
-import {
-  IconArrowRight,
-  IconCar,
-  IconInfoCircle,
-  IconShirt,
-  IconToolsKitchen2,
-} from '@tabler/icons-react';
+import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
 import { useState } from 'react';
-
-const tabData = [
-  {
-    text: 'Lançamentos',
-    value: 'releases',
-  },
-  {
-    text: 'Despesas',
-    value: 'expenses',
-  },
-
-  {
-    text: 'Taxas',
-    value: 'taxes',
-  },
-];
-
-const selectData = [
-  {
-    text: 'Dia',
-    value: 'day',
-  },
-  {
-    text: 'Mês',
-    value: 'month',
-  },
-  {
-    text: 'Ano',
-    value: 'Year',
-  },
-];
-
-const expensesData = [
-  {
-    icon: <IconCar />,
-    text: 'Carro',
-    value: 322,
-    color: 'text-primary',
-  },
-  {
-    icon: <IconShirt />,
-    text: 'Roupas',
-    value: 200,
-    color: 'text-secondary',
-  },
-  {
-    icon: <IconToolsKitchen2 />,
-    text: 'Comida',
-    value: 600,
-    color: 'text-tertiary',
-  },
-];
 
 export default function Home() {
   const [search, setSearch] = useState('');
-  const [activeTab, setActiveTab] = useState(tabData[1].value);
-  const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
 
   return (
     <div className="flex flex-row w-full">
@@ -112,35 +52,11 @@ export default function Home() {
           </div>
         </div>
         <div className="block xl:hidden">
-          <HomeInfoSection
-            {...{
-              search,
-              activeTab,
-              tabData,
-              selectData,
-              activeSelectData,
-              expensesData,
-              setSearch,
-              setActiveTab,
-              setActiveSelectData,
-            }}
-          />
+          <HomeInfoSection search={search} setSearch={setSearch} />
         </div>
       </div>
-      <div className="bg-bg-contrast flex-1 h-screen py-10 px-20 w-fit hidden xl:block">
-        <HomeInfoSection
-          {...{
-            search,
-            activeTab,
-            tabData,
-            selectData,
-            activeSelectData,
-            expensesData,
-            setSearch,
-            setActiveTab,
-            setActiveSelectData,
-          }}
-        />
+      <div className="bg-contrast flex-1 h-screen py-10 px-20 w-fit hidden xl:block">
+        <HomeInfoSection search={search} setSearch={setSearch} />
       </div>
     </div>
   );

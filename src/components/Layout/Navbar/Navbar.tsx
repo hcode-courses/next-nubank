@@ -5,7 +5,6 @@ import {
   IconGraph,
   IconMessage,
   IconSettings,
-  IconShieldLock,
   IconUserCircle,
   IconX,
 } from '@tabler/icons-react';
@@ -44,11 +43,6 @@ const navBarData = [
     text: 'Configurações',
     icon: <IconSettings />,
     link: '/settings',
-  },
-  {
-    text: 'Segurança',
-    icon: <IconShieldLock />,
-    link: '/security',
   },
 ];
 

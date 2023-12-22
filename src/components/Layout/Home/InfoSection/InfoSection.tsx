@@ -1,34 +1,57 @@
 'use client';
 
-import { Input, Select, SelectItem, TabItem, Tabs } from '@/components/Elements';
+import { Input, Select, Tabs } from '@/components/Elements';
+import { DataContext } from '@/providers/DataProvider';
 import { ElementType } from '@/types';
-import { Category, ExpensesTab, ReleasesTab, TaxesTab } from '..';
+import { useContext, useState } from 'react';
+import { ExpensesTab, ReleasesTab, TaxesTab } from '..';
+
+const tabData = [
+  {
+    text: 'Lançamentos',
+    value: 'releases',
+  },
+  {
+    text: 'Despesas',
+    value: 'expenses',
+  },
+
+  {
+    text: 'Taxas',
+    value: 'taxes',
+  },
+];
+
+const selectData = [
+  {
+    text: 'Dia',
+    value: 'day',
+  },
+  {
+    text: 'Mês',
+    value: 'month',
+  },
+  {
+    text: 'Ano',
+    value: 'Year',
+  },
+];
 
 type HomeInfoSectionProps = {
   search: string;
-  activeTab: string;
-  tabData: TabItem[];
-  activeSelectData: SelectItem;
-  expensesData: Category[];
-  selectData: SelectItem[];
-
   setSearch: (value: string) => void;
-  setActiveTab: (value: string) => void;
-  setActiveSelectData: (value: SelectItem) => void;
 } & ElementType;
 
 export function HomeInfoSection({
   search,
-  activeTab,
-  tabData,
-  activeSelectData,
-  expensesData,
-  selectData,
 
-  setActiveTab,
   setSearch,
-  setActiveSelectData,
 }: HomeInfoSectionProps) {
+  const [activeTab, setActiveTab] = useState(tabData[1].value);
+  const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
+
+  const data = useContext(DataContext);
+
   return (
     <>
       <Input
@@ -43,7 +66,7 @@ export function HomeInfoSection({
       </div>
       <div className="w-full">
         {activeTab === 'expenses' ? (
-          <ExpensesTab data={expensesData} />
+          <ExpensesTab data={data.categories} />
         ) : activeTab === 'releases' ? (
           <ReleasesTab />
         ) : activeTab === 'taxes' ? (
