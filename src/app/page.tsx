@@ -70,7 +70,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-row w-full">
-      <div className="flex flex-col flex-1 p-6">
+      <div className="flex flex-col flex-1 p-6 pt-10">
         <div className="flex flex-col items-start justify-start mb-20">
           <h1 className="text-3xl font-bold">Olá, Mateus!</h1>
           <span className="max-w-[320px]">
@@ -127,7 +127,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="bg-bg-contrast flex-1 h-screen py-6 px-20 w-fit hidden xl:block">
+      <div className="bg-bg-contrast flex-1 h-screen py-10 px-20 w-fit hidden xl:block">
         <HomeInfoSection
           {...{
             search,
