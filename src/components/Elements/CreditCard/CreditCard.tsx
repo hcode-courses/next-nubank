@@ -11,7 +11,7 @@ type CreditCardProps = {
 export function CreditCard({ name, brand, className }: CreditCardProps) {
   return (
     <div
-      className={`bg-primary text-white p-4 rounded-lg relative min-w-[320px] h-[180px] z-[-1] ${className}`}
+      className={`bg-primary text-white p-4 rounded-lg relative min-w-[300px] h-[180px] z-[-1] ${className}`}
     >
       <div className="absolute top-6 right-6">
         <img className="h-8" src={brand} alt="Card Brand" />
