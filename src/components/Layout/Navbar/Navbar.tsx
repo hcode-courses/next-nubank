@@ -57,9 +57,9 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
 
   return (
     <nav
-      className={`flex flex-col shadow-md justify-between bg-primary w-[300px] py-20 fixed md:static h-screen text-white ${
+      className={`flex flex-col shadow-xl justify-between bg-primary w-[300px] py-20 fixed h-screen text-white z-[9999] ${
         opened ? 'left-[0]' : 'left-[-300px]'
-      }`}
+      } md:left-0 z-5`}
     >
       <div>
         <IconX

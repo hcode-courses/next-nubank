@@ -1,6 +1,14 @@
 'use client';
-import { Button, CreditCard, Input, Select, Tabs } from '@/components/Elements';
-import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
+
+import { Button, CreditCard } from '@/components/Elements';
+import { HomeInfoSection } from '@/components/Layout';
+import {
+  IconArrowRight,
+  IconCar,
+  IconInfoCircle,
+  IconShirt,
+  IconToolsKitchen2,
+} from '@tabler/icons-react';
 import { useState } from 'react';
 
 const tabData = [
@@ -34,9 +42,30 @@ const selectData = [
   },
 ];
 
+const expensesData = [
+  {
+    icon: <IconCar />,
+    text: 'Carro',
+    value: 322,
+    color: 'text-primary',
+  },
+  {
+    icon: <IconShirt />,
+    text: 'Roupas',
+    value: 200,
+    color: 'text-secondary',
+  },
+  {
+    icon: <IconToolsKitchen2 />,
+    text: 'Comida',
+    value: 600,
+    color: 'text-tertiary',
+  },
+];
+
 export default function Home() {
   const [search, setSearch] = useState('');
-  const [activeTab, setActiveTab] = useState(tabData[0].value);
+  const [activeTab, setActiveTab] = useState(tabData[1].value);
   const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
 
   return (
@@ -44,7 +73,9 @@ export default function Home() {
       <div className="flex flex-col flex-1 p-6">
         <div className="flex flex-col items-start justify-start mb-20">
           <h1 className="text-3xl font-bold">Olá, Mateus!</h1>
-          <span>Bem-vindo de volta. Aqui está uma visão geral da sua conta.</span>
+          <span className="max-w-[320px]">
+            Bem-vindo de volta. Aqui está uma visão geral da sua conta.
+          </span>
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-4">Cartão de Crédito</h2>
@@ -80,16 +111,36 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="flex flex-row mt-20">
-          <h2 className="text-2xl font-bold mb-4">Transações recentes</h2>
+        <div className="block xl:hidden">
+          <HomeInfoSection
+            {...{
+              search,
+              activeTab,
+              tabData,
+              selectData,
+              activeSelectData,
+              expensesData,
+              setSearch,
+              setActiveTab,
+              setActiveSelectData,
+            }}
+          />
         </div>
       </div>
-      <div className="bg-bg-contrast flex-1 h-screen py-6 px-20 w-fit">
-        <Input value={search} setSearch={setSearch} placeholder="Pode perguntar" />
-        <div className="flex flex-row mt-10">
-          <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
-          <Select active={activeSelectData} setActive={setActiveSelectData} data={selectData} />
-        </div>
+      <div className="bg-bg-contrast flex-1 h-screen py-6 px-20 w-fit hidden xl:block">
+        <HomeInfoSection
+          {...{
+            search,
+            activeTab,
+            tabData,
+            selectData,
+            activeSelectData,
+            expensesData,
+            setSearch,
+            setActiveTab,
+            setActiveSelectData,
+          }}
+        />
       </div>
     </div>
   );

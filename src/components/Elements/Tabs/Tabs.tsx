@@ -16,7 +16,7 @@ export function Tabs({ data, active, setActive, className }: TabProps) {
     const isActive = active == item.value;
     return (
       <button
-        key={`tab-${item.value}`}
+        key={`tabs-item-${item.value}`}
         className={`flex flex-col items-center font-medium w-full`}
         onClick={() => setActive(item.value)}
       >
@@ -32,6 +32,8 @@ export function Tabs({ data, active, setActive, className }: TabProps) {
   });
 
   return (
-    <div className={`flex flex-rows items-center text-primary w-full ${className}`}>{tabItems}</div>
+    <div className={`flex flex-rows items-center text-primary min-w-[350px] ${className}`}>
+      {tabItems}
+    </div>
   );
 }

@@ -19,13 +19,13 @@ export function Button({
 
   switch (variant) {
     case 'subtle':
-      twClassName = `flex flex-row items-center justify-center bg-transparent 
+      twClassName = `flex flex-row items-center justify-center h-fit bg-transparent 
       hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
       text-primary text-md hover:text-white font-bold ${className}`;
 
       break;
     default:
-      twClassName = `flex flex-row items-center justify-center bg-primary 
+      twClassName = `flex flex-row items-center justify-center h-fit bg-primary 
       hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
       text-white text-md hover:text-white font-normal ${className}`;
 
