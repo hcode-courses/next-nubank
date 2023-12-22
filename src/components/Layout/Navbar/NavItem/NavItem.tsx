@@ -14,7 +14,7 @@ export function NavItem({ active, text, link, icon }: NavItemProps) {
     <Link href={link}>
       <div
         className={`flex flex-row items-center h-10 px-8 py-6 ${
-          isActive ? 'bg-primary' : ''
+          isActive ? 'bg-secondary' : ''
         } hover:bg-secondary`}
       >
         <span className="mr-10">{icon}</span>
