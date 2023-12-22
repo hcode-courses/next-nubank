@@ -32,7 +32,7 @@ export default function TransactionsPage() {
   return (
     <div className="flex flex-col p-6 pt-10">
       <h1 className="font-bold text-3xl mb-5">Transações</h1>
-      <div className="flex flex-row justify-between w-full p-12 bg-contrast mb-10">
+      <div className="flex flex-row flex-wrap gap-x-[300px] gap-y-10 justify-center w-full p-12 bg-contrast mb-10">
         <div className="flex flex-col font-bold justify-center text-primary">
           <div>
             <span className="font-medium">Total de gastos:</span> R$ 1450,08
