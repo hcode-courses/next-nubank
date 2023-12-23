@@ -42,7 +42,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex flex-row gap-10 mt-10">
+          <div className="flex flex-row gap-5 xs:gap-10 mt-10">
             <Button text="Pagar fatura" />
             <Button
               text="Gerar boleto"

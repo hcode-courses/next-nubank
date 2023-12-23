@@ -56,7 +56,7 @@ export function HomeInfoSection({
   return (
     <>
       <Input
-        className="hidden xl:block"
+        wrapperClassName="hidden xl:block"
         value={search}
         setValue={setSearch}
         placeholder="Pode perguntar"

@@ -33,6 +33,7 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 500,
     categoryId: 0,
+    type: 'credit-card',
   },
   {
     id: uuid(),
@@ -40,6 +41,7 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 300,
     categoryId: 1,
+    type: 'credit-card',
   },
   {
     id: uuid(),
@@ -47,6 +49,7 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 400,
     categoryId: 1,
+    type: 'debit-card',
   },
   {
     id: uuid(),
@@ -54,6 +57,7 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 50,
     categoryId: 2,
+    type: 'pix',
   },
   {
     id: uuid(),
@@ -61,6 +65,7 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 150,
     categoryId: 0,
+    type: 'credit-card',
   },
   {
     id: uuid(),
@@ -68,5 +73,6 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 200,
     categoryId: 2,
+    type: 'pix',
   },
 ];

@@ -2,18 +2,11 @@
 
 import { Button, Input, Select } from '@/components/Elements';
 import { uuid } from '@/lib/uuid';
-import { DataContext } from '@/providers';
+import { DataContext, ModalsContext } from '@/providers';
 import { ElementType } from '@/types';
-import { useCallback, useContext, useState } from 'react';
+import { TransactionForm } from '@/values/modals';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Modal } from '.';
-
-const initialFormValues = {
-  name: '',
-  value: 0,
-  categoryId: 0,
-  type: 'pix',
-  date: new Date(),
-};
 
 const paymentMethods = [
   {
@@ -31,27 +24,45 @@ const paymentMethods = [
 ];
 
 export function TransactionModal({ children }: ElementType) {
-  const [form, setForm] = useState<typeof initialFormValues>(initialFormValues);
   const data = useContext(DataContext);
+  const modals = useContext(ModalsContext);
+  const transactionModal = modals.data.find((modal) => modal.id === 'transaction');
+  const [form, setForm] = useState<TransactionForm>(transactionModal?.data);
 
   const changeFormValue = useCallback(
-    (field: keyof typeof initialFormValues, newValue: any) => {
+    (field: keyof TransactionForm, newValue: any) => {
       setForm({ ...form, [field]: newValue });
     },
     [form]
   );
 
-  console.log(data);
-
-  const handleSubmit = useCallback((e: any, values: typeof initialFormValues) => {
+  const handleSubmit = useCallback((e: any, values: TransactionForm) => {
     e.preventDefault();
-    const transaction = {
-      id: uuid(),
-      ...values,
-    };
 
-    data.transactions.add(transaction);
+    if (transactionModal?.action === 'update') {
+      const id = transactionModal.data.id;
+      const transaction = {
+        id,
+        ...values,
+      };
+
+      console.log('atualizando');
+      data.transactions.update(id, transaction);
+    } else {
+      const transaction = {
+        id: uuid(),
+        ...values,
+      };
+
+      console.log('criando');
+
+      data.transactions.add(transaction);
+    }
   }, []);
+
+  useEffect(() => {
+    setForm(transactionModal?.data);
+  }, [transactionModal?.data]);
 
   return (
     <Modal title="Transação" id="transaction">

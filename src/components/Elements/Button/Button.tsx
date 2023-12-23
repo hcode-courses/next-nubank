@@ -21,6 +21,7 @@ export function Button({
       twClassName = twClassName.concat(
         `bg-transparent hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
         text-primary text-md hover:text-white font-bold`,
+        ' ',
         className
       );
 
@@ -29,6 +30,7 @@ export function Button({
       twClassName = twClassName.concat(
         `bg-primary hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
       text-white text-md hover:text-white font-normal`,
+        ' ',
         className
       );
 

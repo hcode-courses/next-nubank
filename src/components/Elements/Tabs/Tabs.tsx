@@ -32,7 +32,7 @@ export function Tabs({ data, active, setActive, className }: TabProps) {
   });
 
   return (
-    <div className={`flex flex-rows items-center text-primary min-w-[350px] ${className}`}>
+    <div className={`flex flex-rows items-center text-primary min-w-[340px] ${className}`}>
       {tabItems}
     </div>
   );

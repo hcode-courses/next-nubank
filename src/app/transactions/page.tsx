@@ -1,5 +1,6 @@
 'use client';
 import { CategoriesProgress, TransactionItem } from '@/components/Elements';
+import { ModalsContext } from '@/providers';
 import { DataContext } from '@/providers/DataProvider';
 import { ElementType, Transaction } from '@/types';
 import { useContext } from 'react';
@@ -10,6 +11,8 @@ type TransactionDayProps = {
 } & ElementType;
 
 function TransactionDay({ day, data }: TransactionDayProps) {
+  console.log(data);
+
   return (
     <div>
       <h3 className="font-bold text-xl mb-5">{day}</h3>
@@ -26,9 +29,15 @@ function TransactionDay({ day, data }: TransactionDayProps) {
 
 export default function TransactionsPage() {
   const data = useContext(DataContext);
+  const modals = useContext(ModalsContext);
+
   const transactions = data.transactions.data;
   const today = transactions.slice(0, 3);
   const yesterday = transactions.slice(3, 7);
+
+  // useEffect(() => {
+  //   modals.openUpdate('transaction', data.transactions.data[0]);
+  // }, []);
 
   return (
     <div className="flex flex-col p-6 pt-10">
