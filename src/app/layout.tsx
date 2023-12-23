@@ -1,5 +1,5 @@
 import { Container } from '@/components/Layout';
-import { DataProvider } from '@/providers/DataProvider';
+import { DataProvider, ModalsProvider } from '@/providers';
 import '@/styles/fonts.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -17,7 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR">
       <body className={inter.className}>
         <DataProvider>
-          <Container>{children}</Container>
+          <ModalsProvider>
+            <Container>{children}</Container>
+          </ModalsProvider>
         </DataProvider>
       </body>
     </html>

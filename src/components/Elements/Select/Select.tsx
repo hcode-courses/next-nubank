@@ -3,44 +3,45 @@ import { IconCaretDownFilled, IconCaretUpFilled, IconCheck } from '@tabler/icons
 import { useState } from 'react';
 
 export type SelectItem = {
-  text: string;
-  value: string;
+  name: string;
+  value: any;
 };
 
 export type SelectProps = {
   data: SelectItem[];
-  active: SelectItem;
-  setActive: (value: SelectItem) => void;
+  active: any;
+  setActive: (value: any) => void;
 } & ElementType;
 
-export function Select({ data, active, setActive }: SelectProps) {
+export function Select({ data, active, setActive, className }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const activeItem = data.find((item) => item.value === active);
 
   const selectItems = data.map((item) => {
-    const isActive = active.value === item.value;
+    const isActive = active === item.value;
 
     return (
       <div
         key={`select-item-${item.value}`}
         className="flex flex-row justify-between p-2 hover:cursor-pointer hover:bg-bg-contrast"
         onClick={() => {
-          setActive(item);
+          setActive(item.value);
           setMenuOpen(false);
         }}
       >
-        {item.text}
+        {item.name}
         {isActive ? <IconCheck size={16} /> : undefined}
       </div>
     );
   });
 
   return (
-    <div className="relative w-[130px] font-bold text-primary">
+    <div className={`relative w-[130px] font-bold text-primary ${className}`}>
       <div
         onClick={() => setMenuOpen(!menuOpen)}
         className="flex flex-row justify-between items-center h-fit w-full py-1 px-3 rounded-full border-primary text-sm outline-0 focus:border-primary border-2 hover:cursor-pointer"
       >
-        {active.text}
+        {activeItem?.name}
         {menuOpen ? <IconCaretUpFilled size={16} /> : <IconCaretDownFilled size={16} />}
       </div>
       <div

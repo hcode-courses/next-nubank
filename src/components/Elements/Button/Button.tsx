@@ -1,4 +1,3 @@
-import { ElementType } from '@/types';
 import { ReactElement } from 'react';
 
 export type ButtonProps = {
@@ -6,7 +5,7 @@ export type ButtonProps = {
   variant?: 'default' | 'subtle';
   leftSection?: ReactElement;
   rightSection?: ReactElement;
-} & ElementType;
+} & React.HTMLProps<HTMLButtonElement>;
 
 export function Button({
   text,
@@ -15,19 +14,23 @@ export function Button({
   rightSection,
   className = '',
 }: ButtonProps) {
-  let twClassName = '';
+  let twClassName = 'flex flex-row items-center justify-center h-fit ';
 
   switch (variant) {
     case 'subtle':
-      twClassName = `flex flex-row items-center justify-center h-fit bg-transparent 
-      hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
-      text-primary text-md hover:text-white font-bold ${className}`;
+      twClassName = twClassName.concat(
+        `bg-transparent hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
+        text-primary text-md hover:text-white font-bold`,
+        className
+      );
 
       break;
     default:
-      twClassName = `flex flex-row items-center justify-center h-fit bg-primary 
-      hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
-      text-white text-md hover:text-white font-normal ${className}`;
+      twClassName = twClassName.concat(
+        `bg-primary hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
+      text-white text-md hover:text-white font-normal`,
+        className
+      );
 
       break;
   }

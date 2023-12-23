@@ -1,22 +1,23 @@
 import { ElementType } from '@/types';
-import { IconSearch } from '@tabler/icons-react';
+import { ReactElement } from 'react';
 
 type InputProps = {
   value: string;
   setValue: (value: string) => void;
   placeholder?: string;
-} & ElementType;
+  leftSection?: ReactElement;
+} & ElementType<'input'>;
 
-export function Input({ value, setValue, placeholder = '', className }: InputProps) {
+export function Input({ value, setValue, placeholder = '', className, leftSection }: InputProps) {
   return (
-    <div className={`relative text-primary font-normal ${className}`}>
+    <div className={`relative text-primary font-normal `}>
       <input
-        className="w-full p-2 px-8 rounded-full border-primary outline-0 focus:border-primary border-2 placeholder:text-primary"
+        className={`w-full p-2 px-8 rounded-full border-primary outline-0 focus:border-primary border-2 placeholder:text-primary ${className}`}
         value={value}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
       />
-      <IconSearch size={20} className="absolute right-4 top-0 translate-y-3" />
+      {leftSection}
     </div>
   );
 }

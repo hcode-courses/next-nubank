@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Navbar } from '..';
+import { ModalsContainer, Navbar, TransactionModal } from '..';
 import { Header } from '../Header';
 
 type ContainerProps = React.PropsWithChildren;
@@ -14,6 +14,9 @@ export function Container({ children }: ContainerProps) {
       <Navbar opened={opened} setOpened={setOpened} />
       <Header setOpened={setOpened} />
       <main className="h-screen max-w-[1600px] md:pl-[300px] w-full mx-auto">{children}</main>
+      <ModalsContainer>
+        <TransactionModal />
+      </ModalsContainer>
     </div>
   );
 }

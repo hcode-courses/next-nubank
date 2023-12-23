@@ -7,8 +7,9 @@ import { Button, Progress } from '..';
 
 export function CategoriesProgress({ className }: ElementType) {
   const data = useContext(DataContext);
+  const transactions = data.transactions.data;
 
-  let totalExpenses = data.transactions.reduce((acc, item) => acc + item.value, 0);
+  let totalExpenses = transactions.reduce((acc, item) => acc + item.value, 0);
   let infoIteration = totalExpenses / 4;
   let accInfo = totalExpenses;
 

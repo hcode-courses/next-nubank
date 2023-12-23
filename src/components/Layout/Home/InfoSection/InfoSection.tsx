@@ -1,8 +1,9 @@
 'use client';
 
-import { Input, Select, Tabs } from '@/components/Elements';
+import { Input, Select, SelectItem, Tabs } from '@/components/Elements';
 import { DataContext } from '@/providers/DataProvider';
 import { ElementType } from '@/types';
+import { IconSearch } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 import { ExpensesTab, ReleasesTab, TaxesTab } from '..';
 
@@ -24,15 +25,15 @@ const tabData = [
 
 const selectData = [
   {
-    text: 'Dia',
+    name: 'Dia',
     value: 'day',
   },
   {
-    text: 'Mês',
+    name: 'Mês',
     value: 'month',
   },
   {
-    text: 'Ano',
+    name: 'Ano',
     value: 'Year',
   },
 ];
@@ -47,8 +48,8 @@ export function HomeInfoSection({
 
   setSearch,
 }: HomeInfoSectionProps) {
-  const [activeTab, setActiveTab] = useState(tabData[1].value);
-  const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
+  const [activeTab, setActiveTab] = useState<number | string>(tabData[1].value);
+  const [activeSelectData, setActiveSelectData] = useState<SelectItem>(selectData[0]);
 
   const data = useContext(DataContext);
 
@@ -59,6 +60,7 @@ export function HomeInfoSection({
         value={search}
         setValue={setSearch}
         placeholder="Pode perguntar"
+        leftSection={<IconSearch size={20} className="absolute right-4 top-0 translate-y-3" />}
       />
       <div className="flex flex-row flex-wrap justify-between gap-5 mt-10">
         <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />

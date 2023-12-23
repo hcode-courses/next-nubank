@@ -7,7 +7,7 @@ export type TabItem = {
 
 export type TabProps = {
   data: TabItem[];
-  active: string;
+  active: string | number;
   setActive: (value: string) => void;
 } & ElementType;
 
