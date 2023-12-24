@@ -4,21 +4,21 @@ import { IconCar, IconShirt, IconToolsKitchen2 } from '@tabler/icons-react';
 
 export const categories: Category[] = [
   {
-    id: 1,
+    id: 0,
     icon: <IconCar />,
     name: 'Carro',
     value: 322,
     color: 'text-primary',
   },
   {
-    id: 2,
+    id: 1,
     icon: <IconShirt />,
     name: 'Roupas',
     value: 200,
     color: 'text-secondary',
   },
   {
-    id: 3,
+    id: 2,
     icon: <IconToolsKitchen2 />,
     name: 'Comida',
     value: 600,
@@ -30,7 +30,7 @@ export const transactions: Transaction[] = [
   {
     id: uuid(),
     name: 'Conserto do Carro',
-    date: new Date(),
+    date: new Date('01/02/2023'),
     value: 500,
     categoryId: 0,
     type: 'credit-card',
@@ -38,7 +38,7 @@ export const transactions: Transaction[] = [
   {
     id: uuid(),
     name: 'Roupas novas',
-    date: new Date(),
+    date: new Date('01/02/2024'),
     value: 300,
     categoryId: 1,
     type: 'credit-card',

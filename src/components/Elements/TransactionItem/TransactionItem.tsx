@@ -12,8 +12,6 @@ export function TransactionItem({ data }: TransactionItemProps) {
   const dataContext = useContext(DataContext);
   const category = getCategoryById(data.categoryId, dataContext.categories);
 
-  console.log(category);
-
   return (
     <div className="relative flex flex-row flex-wrap w-full items-center justify-between">
       <div className="absolute left-0 w-[50px] h-full flex items-center justify-center">

@@ -4,7 +4,7 @@ export type DataContextType = {
   transactions: {
     data: Transaction[];
     add: (transaction: Transaction) => void;
-    update: (transactionId: string, transaction: Transaction) => void;
+    update: (transactionId: string, newData: Omit<Transaction, 'id'>) => void;
     delete: (transactionId: string) => void;
   };
   categories: Category[];

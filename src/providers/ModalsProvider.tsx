@@ -7,7 +7,7 @@ import { createContext, useCallback, useState } from 'react';
 export const ModalsContext = createContext<ModalsContextType>({} as ModalsContextType);
 
 export function ModalsProvider({ children }: React.PropsWithChildren) {
-  const [transactions, setTransactions] = useState(true);
+  const [transactions, setTransactions] = useState(false);
   const [transactionData, setTransactionData] = useState(initialTransactionFormValues);
   const [transactionAction, setTransactionAction] = useState<'create' | 'update' | undefined>(
     'create'
@@ -31,7 +31,7 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
 
     if (modal) {
       modal.close();
-      setTransactionAction('create');
+      modal.setAction('create');
     }
   }, []);
 
@@ -43,15 +43,20 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
     }
   }, []);
 
-  const openUpdateModal = useCallback((id: string, data: any) => {
-    const modal = modals.find((modal) => modal.id === id);
+  const openUpdateModal = useCallback(
+    (id: string, data: any) => {
+      const modal = modals.find((modal) => modal.id === id);
 
-    if (modal) {
-      modal.open();
-      modal.setData(data);
-      modal.setAction('update');
-    }
-  }, []);
+      console.log('openUpdate', id, data);
+
+      if (modal) {
+        modal.open();
+        modal.setData(data);
+        modal.setAction('update');
+      }
+    },
+    [modals[0].data]
+  );
 
   return (
     <ModalsContext.Provider

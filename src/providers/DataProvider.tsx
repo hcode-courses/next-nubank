@@ -2,13 +2,14 @@
 
 import { DataContextType, Transaction } from '@/types';
 import { categories as categoriesData, transactions as transactionsData } from '@/values/data';
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 
 export const DataContext = createContext<DataContextType>({} as DataContextType);
 
 export function DataProvider({ children }: React.PropsWithChildren) {
   const [transactions, setTransactions] = useState(transactionsData);
   const [categories, setCategories] = useState(categoriesData);
+  const data = useContext(DataContext);
 
   const addTransaction = useCallback((transaction: Transaction) => {
     setTransactions((prev) => [...prev, transaction]);
@@ -22,22 +23,25 @@ export function DataProvider({ children }: React.PropsWithChildren) {
     setTransactions([...oldTransactions]);
   }, []);
 
-  const updateTransaction = useCallback((transactionId: string, transaction: Transaction) => {
-    const oldTransactions = transactions.filter((transaction) => {
-      transaction.id !== transactionId;
-    });
+  const updateTransaction = useCallback(
+    (transactionId: string, newData: Omit<Transaction, 'id'>) => {
+      const oldTransactions = transactions.filter(
+        (transaction) => transaction.id !== transactionId
+      );
 
-    const transactionToUpdate = transactions.filter((transaction) => {
-      transaction.id === transactionId;
-    });
+      const updatedTransaction = {
+        id: transactionId,
+        ...newData,
+      };
 
-    const updatedTransaction = {
-      ...transactionToUpdate,
-      ...transaction,
-    };
+      console.log('updatedtransaction', updatedTransaction);
 
-    setTransactions([...oldTransactions, updatedTransaction]);
-  }, []);
+      console.log(oldTransactions, updatedTransaction);
+
+      setTransactions([...oldTransactions, updatedTransaction]);
+    },
+    []
+  );
 
   return (
     <DataContext.Provider
@@ -45,8 +49,8 @@ export function DataProvider({ children }: React.PropsWithChildren) {
         transactions: {
           data: transactions,
           add: addTransaction,
-          delete: deleteTransaction,
           update: updateTransaction,
+          delete: deleteTransaction,
         },
         categories,
       }}

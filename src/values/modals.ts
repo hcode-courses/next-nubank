@@ -1,5 +1,5 @@
 export const initialTransactionFormValues = {
-  name: 'Ola mundo',
+  name: '',
   value: 0,
   categoryId: 0,
   type: 'pix',

@@ -1,24 +1,33 @@
 'use client';
+
 import { CategoriesProgress, TransactionItem } from '@/components/Elements';
 import { ModalsContext } from '@/providers';
 import { DataContext } from '@/providers/DataProvider';
 import { ElementType, Transaction } from '@/types';
+import { isAfter, isToday, isYesterday } from 'date-fns';
 import { useContext } from 'react';
 
 type TransactionDayProps = {
-  day: string;
+  title: string;
   data: Transaction[];
 } & ElementType;
 
-function TransactionDay({ day, data }: TransactionDayProps) {
-  console.log(data);
+function TransactionSection({ title, data }: TransactionDayProps) {
+  const modals = useContext(ModalsContext);
 
   return (
     <div>
-      <h3 className="font-bold text-xl mb-5">{day}</h3>
+      <h3 className="font-bold text-xl mb-5">{title}</h3>
       <ul className="relative flex flex-col gap-5 w-full before:absolute before:content-[''] before:left-[23px] before:h-full before:w-[2px] before:bg-gray-200">
         {data.map((item) => (
-          <li key={`transaction-item-${item.id}`}>
+          <li
+            className="cursor-pointer"
+            key={`transaction-item-${item.id}`}
+            onClick={() => {
+              console.log('item', item.id);
+              modals.openUpdate('transaction', item);
+            }}
+          >
             <TransactionItem data={item} />
           </li>
         ))}
@@ -29,15 +38,15 @@ function TransactionDay({ day, data }: TransactionDayProps) {
 
 export default function TransactionsPage() {
   const data = useContext(DataContext);
-  const modals = useContext(ModalsContext);
 
-  const transactions = data.transactions.data;
-  const today = transactions.slice(0, 3);
-  const yesterday = transactions.slice(3, 7);
-
-  // useEffect(() => {
-  //   modals.openUpdate('transaction', data.transactions.data[0]);
-  // }, []);
+  const transactions = [...data.transactions.data].sort((a, b) =>
+    isAfter(a.date, b.date) ? -1 : 1
+  );
+  const today = transactions.filter((transaction) => isToday(transaction.date));
+  const yesterday = transactions.filter((transaction) => isYesterday(transaction.date));
+  const previous = transactions.filter(
+    (transaction) => !isToday(transaction.date) && !isYesterday(transaction.date)
+  );
 
   return (
     <div className="flex flex-col p-6 pt-10">
@@ -51,11 +60,14 @@ export default function TransactionsPage() {
             <span className="font-medium">Saldo da sua conta:</span> R$ 2500
           </div>
         </div>
-        <CategoriesProgress className="max-w-[400px]" />
+        <CategoriesProgress className="!justify-center max-w-[400px] flex-wrap gap-x-20 gap-y-10" />
       </div>
       <div className="flex flex-col max-w-[600px] w-full mx-auto gap-10">
-        <TransactionDay data={today} day="Hoje" />
-        <TransactionDay data={yesterday} day="Ontem" />
+        {today.length > 0 && <TransactionSection title="Hoje" data={today} />}
+        {yesterday.length > 0 && <TransactionSection title="Ontem" data={yesterday} />}
+        {previous.length > 0 && (
+          <TransactionSection title={today && yesterday && 'Anterior'} data={previous} />
+        )}
       </div>
     </div>
   );

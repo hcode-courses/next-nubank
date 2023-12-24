@@ -36,29 +36,27 @@ export function TransactionModal({ children }: ElementType) {
     [form]
   );
 
-  const handleSubmit = useCallback((e: any, values: TransactionForm) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: any, values: TransactionForm) => {
+      e.preventDefault();
 
-    if (transactionModal?.action === 'update') {
-      const id = transactionModal.data.id;
-      const transaction = {
-        id,
-        ...values,
-      };
+      if (transactionModal?.action === 'update') {
+        const id = transactionModal.data.id;
+        console.log('transaction-modal', id);
 
-      console.log('atualizando');
-      data.transactions.update(id, transaction);
-    } else {
-      const transaction = {
-        id: uuid(),
-        ...values,
-      };
+        data.transactions.update(id, values);
+      } else {
+        const transaction = {
+          id: uuid(),
+          ...values,
+        };
 
-      console.log('criando');
-
-      data.transactions.add(transaction);
-    }
-  }, []);
+        data.transactions.add(transaction);
+      }
+      transactionModal?.close();
+    },
+    [transactionModal?.data]
+  );
 
   useEffect(() => {
     setForm(transactionModal?.data);
