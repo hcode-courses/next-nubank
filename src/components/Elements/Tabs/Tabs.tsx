@@ -7,13 +7,13 @@ export type TabItem = {
 };
 
 export type TabProps = {
-  data: TabItem[];
+  items: TabItem[];
   active: string | number;
   setActive: (value: string) => void;
-} & ElementType;
+} & ElementType<HTMLDivElement>;
 
-export function Tabs({ data, active, setActive, className }: TabProps) {
-  const tabItems = data.map((item) => {
+export function Tabs({ items, active, setActive, className }: TabProps) {
+  const tabItems = items.map((item) => {
     const isActive = active == item.value;
     return (
       <button

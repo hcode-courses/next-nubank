@@ -1,5 +1,6 @@
 'use client';
 
+import { DeleteTransaction } from '@/components/Actions';
 import { Button, DateInput, NumberInput, Select, TextInput } from '@/components/Elements';
 import { uuid } from '@/lib/utils';
 import { DataContext, ModalsContext } from '@/providers';
@@ -39,7 +40,6 @@ export function TransactionModal({ children }: ElementType) {
 
     if (transactionModal?.action === 'update') {
       const id = transactionModal.data.id;
-      console.log('transaction-modal', id);
 
       data.transactions.update(id, values);
     } else {
@@ -85,22 +85,22 @@ export function TransactionModal({ children }: ElementType) {
             <div className="flex-1">
               <span className="block mb-3">Categoria</span>
               <Select
-                data={data.categories.map((category) => ({
+                items={data.categories.map((category) => ({
                   name: category.name,
                   value: category.id,
                 }))}
                 active={form.categoryId}
                 setActive={(newValue: number) => changeFormValue('categoryId', newValue)}
-                className="w-full"
+                wrapperClassName="w-full"
               />
             </div>
             <div className="flex-1">
               <span className="block mb-3">Tipo</span>
               <Select
-                data={paymentMethods}
+                items={paymentMethods}
                 active={form.type}
                 setActive={(newValue: number) => changeFormValue('type', newValue)}
-                className="w-full"
+                wrapperClassName="w-full"
               />
             </div>
           </div>
@@ -115,7 +115,17 @@ export function TransactionModal({ children }: ElementType) {
           </div>
         </div>
 
-        <Button text="Salvar" type="submit" />
+        <div className="flex flex-row justify-between items-center w-full">
+          {transactionModal?.action === 'update' && (
+            <DeleteTransaction
+              className="flex-1"
+              onClick={() => transactionModal.close()}
+              itemId={transactionModal.data.id}
+            />
+          )}
+
+          <Button className="flex-1" text="Salvar" type="submit" />
+        </div>
       </form>
     </Modal>
   );

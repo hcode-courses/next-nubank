@@ -7,7 +7,7 @@ import { createContext, useState } from 'react';
 export const ModalsContext = createContext<ModalsContextType>({} as ModalsContextType);
 
 export function ModalsProvider({ children }: React.PropsWithChildren) {
-  const [transactions, setTransactions] = useState(true);
+  const [transactions, setTransactions] = useState(false);
   const [transactionData, setTransactionData] = useState(initialTransactionFormValues);
   const [transactionAction, setTransactionAction] = useState<'create' | 'update' | undefined>(
     'create'
@@ -32,6 +32,7 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
     if (modal) {
       modal.close();
       modal.setAction('create');
+      modal.setData(initialTransactionFormValues);
     }
   };
 

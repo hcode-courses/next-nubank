@@ -20,11 +20,7 @@ export default function Home() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Cartão de Crédito</h2>
           <div className="flex flex-row flex-wrap gap-x-10 gap-y-5 items-center w-full">
-            <CreditCard
-              name="Mateus Queirós"
-              logo="/icons/hcode_logo.svg"
-              brand="/icons/mastercard.svg"
-            />
+            <CreditCard name="Mateus Queirós" brand="/icons/mastercard.svg" />
             <div className="max-w-[200px]">
               <div className="flex flex-row items-center">
                 <IconInfoCircle />

@@ -12,6 +12,7 @@ export function AddTransaction({ className }: AddTransactionProps) {
   return (
     <div className={cn(['', className])}>
       <button
+        type="button"
         className="bg-primary rounded-md p-1 text-white hover:bg-tertiary"
         onClick={() => modals.open('transaction')}
       >

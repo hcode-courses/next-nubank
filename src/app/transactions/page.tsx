@@ -10,17 +10,17 @@ import { useContext } from 'react';
 
 type TransactionDayProps = {
   title: string;
-  data: Transaction[];
+  items: Transaction[];
 } & ElementType;
 
-function TransactionSection({ title, data }: TransactionDayProps) {
+function TransactionSection({ title, items }: TransactionDayProps) {
   const modals = useContext(ModalsContext);
 
   return (
     <div>
       <h3 className="font-bold text-xl mb-5">{title}</h3>
       <ul className="relative flex flex-col gap-5 w-full before:absolute before:content-[''] before:left-[23px] before:h-full before:w-[2px] before:bg-gray-200">
-        {data.map((item) => (
+        {items.map((item) => (
           <li
             className="cursor-pointer"
             key={`transaction-item-${item.id}`}
@@ -63,10 +63,10 @@ export default function TransactionsPage() {
         <CategoriesProgress className="!justify-center max-w-[400px] flex-wrap gap-x-20 gap-y-10" />
       </div>
       <div className="flex flex-col max-w-[600px] w-full mx-auto gap-10">
-        {today.length > 0 && <TransactionSection title="Hoje" data={today} />}
-        {yesterday.length > 0 && <TransactionSection title="Ontem" data={yesterday} />}
+        {today.length > 0 && <TransactionSection title="Hoje" items={today} />}
+        {yesterday.length > 0 && <TransactionSection title="Ontem" items={yesterday} />}
         {previous.length > 0 && (
-          <TransactionSection title={today && yesterday && 'Anterior'} data={previous} />
+          <TransactionSection title={today && yesterday && 'Anterior'} items={previous} />
         )}
       </div>
     </div>

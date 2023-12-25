@@ -63,8 +63,8 @@ export function HomeInfoSection({
         leftSection={<IconSearch size={20} className="absolute right-4 top-0 translate-y-3" />}
       />
       <div className="flex flex-row flex-wrap justify-between gap-5 mt-10">
-        <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
-        <Select active={activeSelectData} setActive={setActiveSelectData} data={selectData} />
+        <Tabs items={tabData} active={activeTab} setActive={setActiveTab} />
+        <Select active={activeSelectData} setActive={setActiveSelectData} items={selectData} />
       </div>
       <div className="w-full">
         {activeTab === 'expenses' ? (

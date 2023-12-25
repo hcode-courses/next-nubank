@@ -1,1 +1,1 @@
-export type ElementType<T = 'div'> = React.HTMLAttributes<T>;
+export type ElementType<T = HTMLDivElement> = { wrapperClassName?: string } & React.HTMLProps<T>;

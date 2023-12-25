@@ -10,14 +10,14 @@ export type SelectItem = {
 };
 
 export type SelectProps = {
-  data: SelectItem[];
+  items: SelectItem[];
   active: any;
   setActive: (value: any) => void;
 } & ElementType;
 
-export function Select({ data, active, setActive, className }: SelectProps) {
+export function Select({ items, active, setActive, wrapperClassName, className }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const activeItem = data.find((item) => item.value === active);
+  const activeItem = items.find((item) => item.value === active);
 
   const selectRef = useRef(null);
 
@@ -25,7 +25,7 @@ export function Select({ data, active, setActive, className }: SelectProps) {
     setMenuOpen(false);
   });
 
-  const selectItems = data.map((item) => {
+  const selectItems = items.map((item) => {
     const isActive = active === item.value;
 
     return (
@@ -44,7 +44,10 @@ export function Select({ data, active, setActive, className }: SelectProps) {
   });
 
   return (
-    <div className={cn(['relative w-[130px] font-bold text-primary', className])} ref={selectRef}>
+    <div
+      className={cn(['relative w-[130px] font-bold text-primary', wrapperClassName])}
+      ref={selectRef}
+    >
       <div
         onClick={() => setMenuOpen(!menuOpen)}
         className="flex flex-row justify-between items-center h-fit w-full py-1 px-3 rounded-full border-primary text-sm outline-0 focus:border-primary border-2 hover:cursor-pointer"
