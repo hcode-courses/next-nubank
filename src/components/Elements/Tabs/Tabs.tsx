@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { ElementType } from '@/types';
 
 export type TabItem = {
@@ -32,7 +33,7 @@ export function Tabs({ data, active, setActive, className }: TabProps) {
   });
 
   return (
-    <div className={`flex flex-rows items-center text-primary min-w-[340px] ${className}`}>
+    <div className={cn(['flex flex-rows items-center text-primary min-w-[340px]', className])}>
       {tabItems}
     </div>
   );

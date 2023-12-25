@@ -1,6 +1,6 @@
 'use client';
 
-import { Input, Select, SelectItem, Tabs } from '@/components/Elements';
+import { Select, Tabs, TextInput } from '@/components/Elements';
 import { DataContext } from '@/providers/DataProvider';
 import { ElementType } from '@/types';
 import { IconSearch } from '@tabler/icons-react';
@@ -49,13 +49,13 @@ export function HomeInfoSection({
   setSearch,
 }: HomeInfoSectionProps) {
   const [activeTab, setActiveTab] = useState<number | string>(tabData[1].value);
-  const [activeSelectData, setActiveSelectData] = useState<SelectItem>(selectData[0]);
+  const [activeSelectData, setActiveSelectData] = useState(selectData[0].value);
 
   const data = useContext(DataContext);
 
   return (
     <>
-      <Input
+      <TextInput
         wrapperClassName="hidden xl:block"
         value={search}
         setValue={setSearch}

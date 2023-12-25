@@ -1,5 +1,7 @@
 'use client';
 
+import { getCategoryItems } from '@/lib/categories';
+import { cn } from '@/lib/utils';
 import { DataContext } from '@/providers/DataProvider';
 import { Category, ElementType } from '@/types';
 import { useContext } from 'react';
@@ -13,12 +15,20 @@ export function CategoriesProgress({ className }: ElementType) {
   let infoIteration = totalExpenses / 4;
   let accInfo = totalExpenses;
 
-  function Category({ icon, name, value, color }: Category) {
+  function Category({ id, icon, name, color }: Category) {
+    const categoryTransactions = getCategoryItems(id, data.transactions.data);
+    const totalCategoryExpenses = categoryTransactions.reduce(
+      (acc, transaction) => acc + transaction.value,
+      0
+    );
+
     return (
       <div className={`flex flex-row ${color} mb-3`}>
         {icon}
         <span className="ml-4 font-medium w-20 text-text">{name}</span>
-        <span className="ml-4 font-medium">{Math.round((value / totalExpenses) * 100)}%</span>
+        <span className="ml-4 font-medium">
+          {Math.round((totalCategoryExpenses / totalExpenses) * 100)}%
+        </span>
       </div>
     );
   }
@@ -28,7 +38,7 @@ export function CategoriesProgress({ className }: ElementType) {
   ));
 
   return (
-    <div className={`flex flex-row w-full justify-between ${className}`}>
+    <div className={cn(['flex flex-row w-full justify-between', className])}>
       <div className="flex flex-row relative">
         <div className="flex flex-col justify-between text-sm h-full mr-10">
           {Array(4)
@@ -43,7 +53,7 @@ export function CategoriesProgress({ className }: ElementType) {
           <span>R$ {Math.ceil(infoIteration / 10) * 10}</span>
           <span>R$ 0</span>
         </div>
-        <Progress data={data.categories} />
+        <Progress categories={data.categories} />
       </div>
       <div className="flex flex-col items-center justify-between h-fit">
         {expensesCategories}

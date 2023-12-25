@@ -1,7 +1,10 @@
 'use client';
 
-import { ElementType } from '@/types';
-import { useEffect, useRef, useState } from 'react';
+import { getCategoryItems } from '@/lib/categories';
+import { cn } from '@/lib/utils';
+import { DataContext } from '@/providers';
+import { Category, ElementType } from '@/types';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 type ProgressSection = {
   color: string;
@@ -9,12 +12,13 @@ type ProgressSection = {
 };
 
 type ProgressProps = {
-  data: ProgressSection[];
+  categories: Category[];
 } & ElementType;
 
-export function Progress({ data, className }: ProgressProps) {
+export function Progress({ categories, className }: ProgressProps) {
   let accSectionsHeight = 0;
-  const total = data.reduce((acc, item) => acc + item.value, 0);
+  const dataContext = useContext(DataContext);
+  const totalExpenses = dataContext.transactions.data.reduce((acc, item) => acc + item.value, 0);
 
   const ref = useRef<HTMLHeadingElement>(null);
   let [parentHeight, setParentHeight] = useState(0);
@@ -23,15 +27,21 @@ export function Progress({ data, className }: ProgressProps) {
     setParentHeight(ref.current ? ref.current.offsetHeight : 0);
   }, [ref.current]);
 
-  const sections = data.map((item, index) => {
-    const height = (item.value / total) * parentHeight + accSectionsHeight;
-    const backgroundColor = `var(-${item.color.replace('text', '')})`;
-    const zIndex = data.length - index - 1;
+  const sections = categories.map((category, index) => {
+    const categoryTransactions = getCategoryItems(category.id, dataContext.transactions.data);
+    const totalCategoryExpenses = categoryTransactions.reduce(
+      (acc, transaction) => acc + transaction.value,
+      0
+    );
 
-    accSectionsHeight += (item.value / total) * parentHeight;
+    const height = (totalCategoryExpenses / totalExpenses) * parentHeight + accSectionsHeight;
+    const backgroundColor = `var(-${category.color.replace('text', '')})`;
+    const zIndex = categories.length - index - 1;
+
+    accSectionsHeight += (totalCategoryExpenses / totalExpenses) * parentHeight;
     return (
       <div
-        key={`section-item-${item.color}`}
+        key={`section-item-${category.color}`}
         style={{ height, backgroundColor, zIndex }}
         className={`absolute bottom-0 w-full rounded-full`}
       ></div>
@@ -42,7 +52,7 @@ export function Progress({ data, className }: ProgressProps) {
     <div
       ref={ref}
       style={{ backgroundColor: '#DDD' }}
-      className={`relative min-h-[100px] w-2 rounded-full ${className}`}
+      className={cn(['relative min-h-[100px] w-2 rounded-full', className])}
     >
       {sections}
     </div>

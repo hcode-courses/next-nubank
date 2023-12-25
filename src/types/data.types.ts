@@ -14,7 +14,6 @@ export type Category = {
   id: number;
   name: string;
   color: string;
-  value: number;
   icon: ReactElement;
 };
 
