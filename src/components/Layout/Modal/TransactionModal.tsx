@@ -32,7 +32,7 @@ export function TransactionModal({ children }: ElementType) {
   const [form, setForm] = useState<TransactionForm>(transactionModal?.data);
 
   const changeFormValue = (field: keyof TransactionForm, newValue: any) => {
-    setForm({ ...form, [field]: newValue });
+    setForm((form) => ({ ...form, [field]: newValue }));
   };
 
   const handleSubmit = (e: any, values: TransactionForm) => {
@@ -91,7 +91,7 @@ export function TransactionModal({ children }: ElementType) {
                   value: category.id,
                 }))}
                 active={form.categoryId}
-                setActive={(newValue: number) => changeFormValue('categoryId', newValue)}
+                setActive={(newValue: number) => changeFormValue('categoryId', Number(newValue))}
                 wrapperClassName="w-full"
               />
             </div>
@@ -100,7 +100,7 @@ export function TransactionModal({ children }: ElementType) {
               <Select
                 items={paymentMethods}
                 active={form.type}
-                setActive={(newValue: number) => changeFormValue('type', newValue)}
+                setActive={(newValue: any) => changeFormValue('type', newValue)}
                 wrapperClassName="w-full"
               />
             </div>

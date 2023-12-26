@@ -14,16 +14,8 @@ export type SelectProps = {
 
 export function Select({ items, active, setActive, className }: SelectProps) {
   const selectItems = items.map((item) => {
-    const isActive = active === item.value;
-
     return (
-      <option
-        key={`select-item-${item.value}`}
-        selected={isActive}
-        onSelect={() => {
-          setActive(item.value);
-        }}
-      >
+      <option key={`select-item-${item.value}`} value={item.value}>
         {item.name}
       </option>
     );
@@ -31,6 +23,10 @@ export function Select({ items, active, setActive, className }: SelectProps) {
 
   return (
     <select
+      value={active}
+      onChange={(e: any) => {
+        setActive(e.target.value);
+      }}
       className={cn([
         'select select-sm flex w-full max-w-xs bg-transparent text-primary border-primary border-2 font-medium rounded-full',
         className,

@@ -15,10 +15,14 @@ export function DataProvider({ children }: React.PropsWithChildren) {
   const [categories, setCategories] = useState(categoriesData);
 
   const addTransaction = (transaction: Transaction) => {
+    console.log(transaction);
+
     setTransactions((prev) => [...prev, transaction]);
   };
 
   const updateTransaction = (transactionId: string, newData: Omit<Transaction, 'id'>) => {
+    console.log(newData);
+
     const otherTransactions = transactions.filter(
       (transaction) => transaction.id !== transactionId
     );
