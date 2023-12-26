@@ -1,15 +1,19 @@
 'use client';
 
-import { Button, CreditCard } from '@/components/Elements';
+import { Button, CreditCard, TransactionList } from '@/components/Elements';
 import { HomeInfoSection } from '@/components/Layout';
+import { DataContext } from '@/providers';
 import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 export default function Home() {
   const [search, setSearch] = useState('');
 
+  const dataContext = useContext(DataContext);
+  const transactions = dataContext.transactions.data;
+
   return (
-    <div className="flex flex-row w-full">
+    <div className="flex flex-row w-full xl:max-w-[calc(50%-60px)]">
       <div className="flex flex-col flex-1 p-6 pt-10">
         <div className="flex flex-col items-start justify-start mb-20">
           <h1 className="text-3xl font-bold">Olá, Mateus!</h1>
@@ -50,9 +54,14 @@ export default function Home() {
         <div className="block xl:hidden">
           <HomeInfoSection search={search} setSearch={setSearch} />
         </div>
+        <div className="mt-10">
+          <TransactionList items={transactions} title="Transações recentes" />
+        </div>
       </div>
-      <div className="bg-contrast flex-1 h-screen py-10 px-20 w-fit hidden xl:block">
-        <HomeInfoSection search={search} setSearch={setSearch} />
+      <div className="bg-contrast fixed w-[20%] xl:w-[calc(50%-100px)] right-0 flex-1 h-screen py-10 px-20 hidden xl:block">
+        <div className="max-w-[500px]">
+          <HomeInfoSection search={search} setSearch={setSearch} />
+        </div>
       </div>
     </div>
   );

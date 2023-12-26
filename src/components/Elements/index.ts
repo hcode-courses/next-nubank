@@ -6,3 +6,4 @@ export * from './Inputs';
 export * from './Progress';
 export * from './Tabs';
 export * from './TransactionItem';
+export * from './TransactionList';

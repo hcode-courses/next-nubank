@@ -8,7 +8,7 @@ export const ModalsContext = createContext<ModalsContextType>({} as ModalsContex
 
 export function ModalsProvider({ children }: React.PropsWithChildren) {
   const [transactions, setTransactions] = useState(false);
-  const [transactionData, setTransactionData] = useState(initialTransactionFormValues);
+  const [transactionFormData, setTransactionFormData] = useState(initialTransactionFormValues);
   const [transactionAction, setTransactionAction] = useState<'create' | 'update' | undefined>(
     'create'
   );
@@ -18,9 +18,13 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
       id: 'transaction',
       opened: transactions,
       open: () => setTransactions(true),
-      close: () => setTransactions(false),
-      data: transactionData,
-      setData: setTransactionData,
+      close: () => {
+        setTransactions(false);
+        setTransactionFormData(initialTransactionFormValues);
+        setTransactionAction('create');
+      },
+      data: transactionFormData,
+      setData: setTransactionFormData,
       action: transactionAction,
       setAction: setTransactionAction,
     },

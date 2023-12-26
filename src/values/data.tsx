@@ -1,6 +1,6 @@
 import { uuid } from '@/lib/utils';
 import { Category, Transaction } from '@/types';
-import { IconCar, IconShirt, IconToolsKitchen2 } from '@tabler/icons-react';
+import { IconCar, IconShirt, IconShoppingCart, IconToolsKitchen2 } from '@tabler/icons-react';
 
 export const categories: Category[] = [
   {
@@ -20,6 +20,12 @@ export const categories: Category[] = [
     icon: <IconToolsKitchen2 />,
     name: 'Comida',
     color: 'text-tertiary',
+  },
+  {
+    id: 3,
+    icon: <IconShoppingCart />,
+    name: 'Mercado',
+    color: 'text-secondary',
   },
 ];
 
@@ -70,6 +76,14 @@ export const transactions: Transaction[] = [
     date: new Date(),
     value: 200,
     categoryId: 2,
+    type: 'pix',
+  },
+  {
+    id: uuid(),
+    name: 'Mercado',
+    date: new Date(),
+    value: 230,
+    categoryId: 3,
     type: 'pix',
   },
 ];

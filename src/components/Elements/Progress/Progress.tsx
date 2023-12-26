@@ -4,7 +4,7 @@ import { getCategoryItems } from '@/lib/categories';
 import { cn } from '@/lib/utils';
 import { DataContext } from '@/providers';
 import { Category, ElementType } from '@/types';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useLayoutEffect, useRef, useState } from 'react';
 
 type ProgressSection = {
   color: string;
@@ -23,9 +23,14 @@ export function Progress({ categories, className }: ProgressProps) {
   const ref = useRef<HTMLHeadingElement>(null);
   let [parentHeight, setParentHeight] = useState(0);
 
-  useEffect(() => {
-    setParentHeight(ref.current ? ref.current.offsetHeight : 0);
-  }, [ref.current]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setParentHeight(ref.current ? ref.current.offsetHeight : 0);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   const sections = categories.map((category, index) => {
     const categoryTransactions = getCategoryItems(category.id, dataContext.transactions.data);
@@ -41,7 +46,7 @@ export function Progress({ categories, className }: ProgressProps) {
     accSectionsHeight += (totalCategoryExpenses / totalExpenses) * parentHeight;
     return (
       <div
-        key={`section-item-${category.color}`}
+        key={`section-item-${category.name}`}
         style={{ height, backgroundColor, zIndex }}
         className={`absolute bottom-0 w-full rounded-full`}
       ></div>

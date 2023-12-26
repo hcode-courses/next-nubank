@@ -6,7 +6,6 @@ import { uuid } from '@/lib/utils';
 import { DataContext, ModalsContext } from '@/providers';
 import { ElementType } from '@/types';
 import { TransactionForm } from '@/values/modals';
-import { format } from 'date-fns/format';
 import { useContext, useEffect, useState } from 'react';
 import { Modal } from '.';
 
@@ -29,6 +28,7 @@ export function TransactionModal({ children }: ElementType) {
   const data = useContext(DataContext);
   const modals = useContext(ModalsContext);
   const transactionModal = modals.data.find((modal) => modal.id === 'transaction');
+
   const [form, setForm] = useState<TransactionForm>(transactionModal?.data);
 
   const changeFormValue = (field: keyof TransactionForm, newValue: any) => {
@@ -50,6 +50,7 @@ export function TransactionModal({ children }: ElementType) {
 
       data.transactions.add(transaction);
     }
+
     transactionModal?.close();
   };
 
@@ -106,12 +107,18 @@ export function TransactionModal({ children }: ElementType) {
           </div>
           <div className="mb-5">
             <span className="block mb-3">Valor</span>
+            {/* <DateInput selected={form.date} onChange={(date) => changeFormValue('date', date)} /> */}
             <DateInput
+              className={''}
+              ssss={form.date}
+              setValue={(date) => changeFormValue('date', date)}
+            />
+            {/* <DateInput
               value={format(form.date, 'yyyy-MM-dd')}
               setValue={(newValue: string) => changeFormValue('date', new Date(newValue))}
               placeholder="Data"
               className="pl-3 h-8"
-            />
+            /> */}
           </div>
         </div>
 

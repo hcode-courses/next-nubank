@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { ReactElement } from 'react';
 
 export type ButtonProps = {
@@ -14,25 +15,25 @@ export function Button({
   rightSection,
   className = '',
 }: ButtonProps) {
-  let twClassName = 'flex flex-row items-center justify-center h-fit ';
+  let twClassName = 'flex flex-row items-center justify-center h-fit p-2 ';
 
   switch (variant) {
     case 'subtle':
-      twClassName = twClassName.concat(
+      twClassName = cn([
+        twClassName,
         `bg-transparent hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
-        text-primary text-md hover:text-white font-bold`,
-        ' ',
-        className
-      );
+        text-primary text-md hover:text-white font-bold `,
+        className,
+      ]);
 
       break;
     default:
-      twClassName = twClassName.concat(
+      twClassName = cn([
+        twClassName,
         `bg-primary hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
-      text-white text-md hover:text-white font-normal`,
-        ' ',
-        className
-      );
+      text-white text-md hover:text-white font-normal `,
+        className,
+      ]);
 
       break;
   }

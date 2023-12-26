@@ -1,35 +1,27 @@
 import { cn } from '@/lib/utils';
 import { ElementType } from '@/types';
-import { InputType } from '..';
+import ReactDatePicker from 'react-datepicker';
 
 export type DateInputProps = {
-  value: string;
-  setValue: (value: string) => void;
-} & InputType &
-  ElementType<'input'>;
+  ssss: Date;
+  setValue: (value: Date | null) => void;
+} & ElementType<'div'>;
 
-export function DateInput({
-  value,
-  setValue,
-  placeholder = '',
-  className,
-  wrapperClassName,
-  leftSection,
-}: DateInputProps) {
+export function DateInput({ ssss, setValue, className, wrapperClassName }: DateInputProps) {
   return (
-    <div className={cn(['relative text-primary font-normal', wrapperClassName])}>
-      <input
-        type="date"
-        className={cn([
-          'w-full p-2 px-8 rounded-full border-primary outline-0 focus:border-primary border-2 placeholder:text-primary',
-          className,
-        ])}
-        value={String(value)}
-        placeholder={placeholder}
-        onChange={(e) => setValue(e.target.value)}
-        onKeyDown={() => 'return false'}
+    <div
+      className={cn([
+        'w-full p-2 px-4 text-sm rounded-full border-primary outline-0 focus:border-primary border-2 placeholder:text-primary text-primary font-medium',
+        wrapperClassName,
+      ])}
+    >
+      <ReactDatePicker
+        locale="ptBR"
+        className={cn(['focus:outline-none leading-[6px]', className])}
+        selected={ssss}
+        onChange={(date) => setValue(date)}
+        dateFormat="dd/MM/yyyy"
       />
-      {leftSection}
     </div>
   );
 }
