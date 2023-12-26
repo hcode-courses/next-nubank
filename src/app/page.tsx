@@ -35,20 +35,22 @@ export default function Home() {
                 Seu vencimento é no dia <span className="font-bold">27/08/2023</span>{' '}
               </span>
               <Button
-                text="Saiba mais"
                 rightSection={<IconArrowRight style={{ rotate: '-45deg' }} size={20} />}
                 variant="subtle"
-                className="mt-2 px-0 py-1 min-w-0"
-              />
+                className="mt-2 min-w-0 w-fit"
+              >
+                Saiba mais
+              </Button>
             </div>
           </div>
           <div className="flex flex-row gap-5 xs:gap-10 mt-10">
-            <Button text="Pagar fatura" />
+            <Button>Pagar fatura</Button>
             <Button
-              text="Gerar boleto"
               variant="subtle"
               rightSection={<IconArrowRight style={{ rotate: '-45deg' }} size={20} />}
-            />
+            >
+              Gerar boleto
+            </Button>
           </div>
         </div>
         <div className="block xl:hidden">

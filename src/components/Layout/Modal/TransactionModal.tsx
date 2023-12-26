@@ -125,13 +125,15 @@ export function TransactionModal({ children }: ElementType) {
         <div className="flex flex-row justify-between items-center w-full">
           {transactionModal?.action === 'update' && (
             <DeleteTransaction
-              className="flex-1"
+              className="flex flex-row flex-1 justify-start"
               onClick={() => transactionModal.close()}
               itemId={transactionModal.data.id}
             />
           )}
 
-          <Button className="flex-1" text="Salvar" type="submit" />
+          <Button className="flex-1" type="submit">
+            Salvar
+          </Button>
         </div>
       </form>
     </Modal>

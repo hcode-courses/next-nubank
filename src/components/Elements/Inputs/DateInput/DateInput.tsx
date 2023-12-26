@@ -17,7 +17,7 @@ export function DateInput({ ssss, setValue, className, wrapperClassName }: DateI
     >
       <ReactDatePicker
         locale="ptBR"
-        className={cn(['focus:outline-none leading-[6px]', className])}
+        className={cn(['focus:outline-none leading-[6px] bg-transparent', className])}
         selected={ssss}
         onChange={(date) => setValue(date)}
         dateFormat="dd/MM/yyyy"

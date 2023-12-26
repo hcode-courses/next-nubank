@@ -64,7 +64,12 @@ export function HomeInfoSection({
       />
       <div className="flex flex-row flex-wrap justify-between gap-5 mt-10">
         <Tabs items={tabData} active={activeTab} setActive={setActiveTab} />
-        <Select active={activeSelectData} setActive={setActiveSelectData} items={selectData} />
+        <Select
+          active={activeSelectData}
+          setActive={setActiveSelectData}
+          items={selectData}
+          className="w-[100px]"
+        />
       </div>
       <div className="w-full">
         {activeTab === 'expenses' ? (

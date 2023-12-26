@@ -2,47 +2,57 @@ import { cn } from '@/lib/utils';
 import { ReactElement } from 'react';
 
 export type ButtonProps = {
-  text: string;
   variant?: 'default' | 'subtle';
   leftSection?: ReactElement;
   rightSection?: ReactElement;
+  tooltip?: string;
 } & React.HTMLProps<HTMLButtonElement>;
 
 export function Button({
-  text,
+  children,
   variant = 'default',
   leftSection,
   rightSection,
   className = '',
+  tooltip,
 }: ButtonProps) {
-  let twClassName = 'flex flex-row items-center justify-center h-fit p-2 ';
+  const defaultStyle = 'btn btn-sm py-3 px-10 h-fit min-h-11';
 
-  switch (variant) {
-    case 'subtle':
-      twClassName = cn([
-        twClassName,
-        `bg-transparent hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
-        text-primary text-md hover:text-white font-bold `,
-        className,
-      ]);
+  const content = (
+    <>
+      {leftSection && <div className="mr-2">{leftSection}</div>}
+      {children}
+      {rightSection && <div className="ml-2">{rightSection}</div>}
+    </>
+  );
 
-      break;
-    default:
-      twClassName = cn([
-        twClassName,
-        `bg-primary hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full 
-      text-white text-md hover:text-white font-normal `,
-        className,
-      ]);
-
-      break;
+  if (variant === 'default') {
+    return (
+      <div className={cn([tooltip && 'tooltip'])} data-tip={tooltip}>
+        <button
+          className={cn([
+            defaultStyle,
+            'text-white bg-primary hover:bg-tertiary border-none rounded-full shadow-none',
+            className,
+          ])}
+        >
+          {content}
+        </button>
+      </div>
+    );
   }
 
-  return (
-    <button className={twClassName}>
-      {leftSection && <div className="mr-2">{leftSection}</div>}
-      {text}
-      {rightSection && <div className="ml-2">{rightSection}</div>}
-    </button>
-  );
+  if (variant === 'subtle') {
+    return (
+      <button
+        className={cn([
+          defaultStyle,
+          'text-primary bg-transparent hover:bg-primary hover:text-white border-none rounded-full shadow-none',
+          className,
+        ])}
+      >
+        {content}
+      </button>
+    );
+  }
 }

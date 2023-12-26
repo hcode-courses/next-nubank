@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-export type InputType = {
+export type DefaultInputType = {
   placeholder?: string;
   leftSection?: ReactElement;
   wrapperClassName?: string;

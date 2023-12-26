@@ -61,7 +61,7 @@ export function CategoriesProgress({ className }: ElementType) {
           </div>
           <div className="flex flex-col items-center justify-between h-fit">
             {expensesCategories}
-            <Button className="mt-5" text="Imprimir" />
+            <Button className="mt-5">Imprimir</Button>
           </div>
         </>
       )}
