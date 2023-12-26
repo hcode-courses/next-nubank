@@ -2,16 +2,16 @@
 
 import { DataContextType, Transaction } from '@/types';
 import { categories as categoriesData, transactions as transactionsData } from '@/values/data';
+import { useLocalStorage } from '@mantine/hooks';
 import { createContext, useState } from 'react';
 
 export const DataContext = createContext<DataContextType>({} as DataContextType);
 
 export function DataProvider({ children }: React.PropsWithChildren) {
-  const [transactions, setTransactions] = useState<Transaction[]>(transactionsData);
-  // const [transactions, setTransactions] = useState<Transaction[]>({
-  //   defaultValue: transactionsData,
-  //   key: 'transactions-nubank',
-  // });
+  const [transactions, setTransactions] = useLocalStorage<Transaction[]>({
+    defaultValue: transactionsData,
+    key: 'transactions-nubank',
+  });
   const [categories, setCategories] = useState(categoriesData);
 
   const addTransaction = (transaction: Transaction) => {
