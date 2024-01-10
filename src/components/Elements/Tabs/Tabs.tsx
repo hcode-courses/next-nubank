@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { ElementType } from '@/types';
 
 export type TabItem = {
@@ -6,16 +7,17 @@ export type TabItem = {
 };
 
 export type TabProps = {
-  data: TabItem[];
-  active: string;
+  items: TabItem[];
+  active: string | number;
   setActive: (value: string) => void;
-} & ElementType;
+} & ElementType<HTMLDivElement>;
 
-export function Tabs({ data, active, setActive, className }: TabProps) {
-  const tabItems = data.map((item) => {
+export function Tabs({ items, active, setActive, className }: TabProps) {
+  const tabItems = items.map((item) => {
     const isActive = active == item.value;
     return (
       <button
+        key={`tabs-item-${item.value}`}
         className={`flex flex-col items-center font-medium w-full`}
         onClick={() => setActive(item.value)}
       >
@@ -31,6 +33,8 @@ export function Tabs({ data, active, setActive, className }: TabProps) {
   });
 
   return (
-    <div className={`flex flex-rows items-center text-primary w-full ${className}`}>{tabItems}</div>
+    <div className={cn(['flex flex-rows items-center text-primary min-w-[340px]', className])}>
+      {tabItems}
+    </div>
   );
 }

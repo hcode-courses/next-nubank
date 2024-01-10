@@ -1,59 +1,30 @@
 'use client';
-import { Button, CreditCard, Input, Select, Tabs } from '@/components/Elements';
+
+import { Button, CreditCard, TransactionList } from '@/components/Elements';
+import { HomeInfoSection } from '@/components/Layout';
+import { DataContext } from '@/providers';
 import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
-import { useState } from 'react';
-
-const tabData = [
-  {
-    text: 'Lançamentos',
-    value: 'releases',
-  },
-  {
-    text: 'Despesas',
-    value: 'expenses',
-  },
-
-  {
-    text: 'Taxas',
-    value: 'taxes',
-  },
-];
-
-const selectData = [
-  {
-    text: 'Dia',
-    value: 'day',
-  },
-  {
-    text: 'Mês',
-    value: 'month',
-  },
-  {
-    text: 'Ano',
-    value: 'Year',
-  },
-];
+import { useContext, useState } from 'react';
 
 export default function Home() {
   const [search, setSearch] = useState('');
-  const [activeTab, setActiveTab] = useState(tabData[0].value);
-  const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
+
+  const dataContext = useContext(DataContext);
+  const transactions = dataContext.transactions.data;
 
   return (
-    <div className="flex flex-row w-full">
-      <div className="flex flex-col flex-1 p-6">
+    <div className="flex flex-row w-full xl:max-w-[calc(50%-60px)]">
+      <div className="flex flex-col flex-1 p-6 pt-10">
         <div className="flex flex-col items-start justify-start mb-20">
           <h1 className="text-3xl font-bold">Olá, Mateus!</h1>
-          <span>Bem-vindo de volta. Aqui está uma visão geral da sua conta.</span>
+          <span className="max-w-[320px]">
+            Bem-vindo de volta. Aqui está uma visão geral da sua conta.
+          </span>
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-4">Cartão de Crédito</h2>
           <div className="flex flex-row flex-wrap gap-x-10 gap-y-5 items-center w-full">
-            <CreditCard
-              name="Mateus Queirós"
-              logo="/icons/hcode_logo.svg"
-              brand="/icons/mastercard.svg"
-            />
+            <CreditCard name="Mateus Queirós" brand="/icons/mastercard.svg" />
             <div className="max-w-[200px]">
               <div className="flex flex-row items-center">
                 <IconInfoCircle />
@@ -64,31 +35,34 @@ export default function Home() {
                 Seu vencimento é no dia <span className="font-bold">27/08/2023</span>{' '}
               </span>
               <Button
-                text="Saiba mais"
                 rightSection={<IconArrowRight style={{ rotate: '-45deg' }} size={20} />}
                 variant="subtle"
-                className="mt-2 px-0 py-1 min-w-0"
-              />
+                className="mt-2 min-w-0 w-fit"
+              >
+                Saiba mais
+              </Button>
             </div>
           </div>
-          <div className="flex flex-row gap-10 mt-10">
-            <Button text="Pagar fatura" />
+          <div className="flex flex-row gap-5 xs:gap-10 mt-10">
+            <Button>Pagar fatura</Button>
             <Button
-              text="Gerar boleto"
               variant="subtle"
               rightSection={<IconArrowRight style={{ rotate: '-45deg' }} size={20} />}
-            />
+            >
+              Gerar boleto
+            </Button>
           </div>
         </div>
-        <div className="flex flex-row mt-20">
-          <h2 className="text-2xl font-bold mb-4">Transações recentes</h2>
+        <div className="block xl:hidden">
+          <HomeInfoSection search={search} setSearch={setSearch} />
+        </div>
+        <div className="mt-10">
+          <TransactionList items={transactions} title="Transações recentes" />
         </div>
       </div>
-      <div className="bg-bg-contrast flex-1 h-screen py-6 px-20 w-fit">
-        <Input value={search} setSearch={setSearch} placeholder="Pode perguntar" />
-        <div className="flex flex-row mt-10">
-          <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
-          <Select active={activeSelectData} setActive={setActiveSelectData} data={selectData} />
+      <div className="bg-contrast fixed w-[20%] xl:w-[calc(50%-100px)] right-0 flex-1 h-screen py-10 px-20 hidden xl:block">
+        <div className="max-w-[500px]">
+          <HomeInfoSection search={search} setSearch={setSearch} />
         </div>
       </div>
     </div>

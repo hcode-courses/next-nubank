@@ -5,7 +5,6 @@ import {
   IconGraph,
   IconMessage,
   IconSettings,
-  IconShieldLock,
   IconUserCircle,
   IconX,
 } from '@tabler/icons-react';
@@ -45,11 +44,6 @@ const navBarData = [
     icon: <IconSettings />,
     link: '/settings',
   },
-  {
-    text: 'Segurança',
-    icon: <IconShieldLock />,
-    link: '/security',
-  },
 ];
 
 export function Navbar({ opened, setOpened }: NavbarProps) {
@@ -57,9 +51,9 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
 
   return (
     <nav
-      className={`flex flex-col shadow-md justify-between bg-primary w-[300px] py-20 fixed md:static h-screen text-white ${
+      className={`flex flex-col shadow-xl justify-between bg-primary w-[300px] py-20 fixed h-screen text-white z-[9] ${
         opened ? 'left-[0]' : 'left-[-300px]'
-      }`}
+      } md:left-0 z-5`}
     >
       <div>
         <IconX
@@ -68,7 +62,6 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
           className="md:hidden absolute top-4 left-8"
           cursor="pointer"
           onClick={() => {
-            console.log(opened);
             setOpened(false);
           }}
         />
@@ -90,10 +83,10 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
       </div>
 
       <div className="flex flex-col items-center p-4 text-sm">
-        <Image className="mb-4" src="/icons/hcode_logo.svg" alt="Avatar" width={70} height={70} />
+        <Image className="mb-4" src="/nubank_logo.svg" alt="Avatar" width={70} height={70} />
         <div className="flex flex-col items-center">
-          <span>&#169; 2023 Hcode Banco</span>
-          <span>Todos os direitos reservados</span>
+          <span>&#169; 2023 Nubank</span>
+          <span>Arte conceitual do app Nubank</span>
         </div>
       </div>
     </nav>
