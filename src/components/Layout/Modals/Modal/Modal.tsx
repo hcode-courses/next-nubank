@@ -9,9 +9,10 @@ import { useRef } from 'react';
 type ModalProps = {
   id: string;
   title: string;
-} & ElementType;
+} & ElementType &
+  React.PropsWithChildren;
 
-export function Modal({ id, title, className }: ModalProps) {
+export function Modal({ id, title, className, children }: ModalProps) {
   const modalRef = useRef(null);
 
   useClickOutside(modalRef, () => {
@@ -23,7 +24,7 @@ export function Modal({ id, title, className }: ModalProps) {
       ref={modalRef}
       data-modal={id}
       className={cn([
-        'flex flex-col w-[400px] h-[500px] bg-bg max-w-[80%] max-h-screen rounded-xl px-6 py-8',
+        'flex flex-col w-[400px] h-[540px] bg-bg max-w-[80%] max-h-screen rounded-xl px-6 py-8 z-50',
         className,
       ])}
     >
@@ -33,6 +34,7 @@ export function Modal({ id, title, className }: ModalProps) {
           <IconX />
         </div>
       </div>
+      <div>{children}</div>
     </div>
   );
 }

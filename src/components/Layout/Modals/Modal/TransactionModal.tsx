@@ -1,6 +1,6 @@
 'use client';
 
-import { DateInput, NumberInput, Select, TextInput } from '@/components/Elements';
+import { Button, DateInput, NumberInput, Select, TextInput } from '@/components/Elements';
 import { TransactionForm, initialTransactionFormValues } from '@/types/modal.types';
 import { categories } from '@/values/data';
 import { useState } from 'react';
@@ -88,7 +88,9 @@ export function TransactionModal() {
         <div className="flex flex-row justify-between items-center w-full">
           {/* <DeleteTransaction /> */}
 
-          {/* <Button /> */}
+          <Button className="flex-1" type="submit">
+            Salvar
+          </Button>
         </div>
       </form>
     </Modal>
