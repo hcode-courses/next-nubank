@@ -8,23 +8,6 @@ export type TextInputProps = {
 } & ElementType<HTMLInputElement> &
   DefaultInputType;
 
-export function TextInput({
-  value,
-  setValue,
-  placeholder = '',
-  className,
-  wrapperClassName,
-  leftSection,
-}: TextInputProps) {
-  return (
-    <Input
-      type="text"
-      value={value}
-      setValue={setValue}
-      wrapperClassName={wrapperClassName}
-      className={className}
-      leftSection={leftSection}
-      placeholder={placeholder}
-    />
-  );
+export function TextInput(data: TextInputProps) {
+  return <Input type="text" {...data} />;
 }

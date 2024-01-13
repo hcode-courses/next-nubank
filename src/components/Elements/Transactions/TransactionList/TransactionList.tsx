@@ -2,7 +2,7 @@ import { ElementType, Transaction } from '@/types';
 import { TransactionItem } from '..';
 
 type TransactionListProps = {
-  title: string;
+  title?: string;
   items: Transaction[];
 } & ElementType;
 
