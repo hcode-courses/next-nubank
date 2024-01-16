@@ -1,7 +1,8 @@
 import { getCategoryItems } from '@/lib/categories';
 import { cn } from '@/lib/utils';
+import { DataContext } from '@/providers';
 import { Category, ElementType } from '@/types';
-import { categories, transactions } from '@/values/data';
+import { useContext } from 'react';
 import { Button, Progress } from '..';
 
 type CategoryProps = {
@@ -9,6 +10,9 @@ type CategoryProps = {
 } & Category;
 
 function Category({ color, id, name, icon, totalExpenses }: CategoryProps) {
+  const dataContext = useContext(DataContext);
+  const transactions = dataContext.transactions.data;
+
   const categoryTransactions = getCategoryItems(id, transactions);
   const totalCategoryExpenses = categoryTransactions.reduce(
     (acc, transaction) => transaction.value + acc,
@@ -27,6 +31,10 @@ function Category({ color, id, name, icon, totalExpenses }: CategoryProps) {
 }
 
 export function CategoriesProgress({ className }: ElementType) {
+  const dataContext = useContext(DataContext);
+  const transactions = dataContext.transactions.data;
+  const categories = dataContext.categories;
+
   let totalExpenses = transactions.reduce((acc, transaction) => transaction.value + acc, 0);
   let infoIteration = totalExpenses / 4;
   let accInfo = totalExpenses;

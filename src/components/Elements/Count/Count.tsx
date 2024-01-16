@@ -10,8 +10,6 @@ export function Count({ initialValue, increment }: CountProps) {
   const [count, setCount] = useState(initialValue);
   const total = count + 5;
 
-  console.log('ola');
-
   function handleClick(inc: number) {
     setCount(count + inc);
   }

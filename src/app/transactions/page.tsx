@@ -2,12 +2,14 @@
 
 import { AddTransaction } from '@/components/Actions';
 import { CategoriesProgress, TransactionList } from '@/components/Elements';
-import { transactions } from '@/values/data';
+import { DataContext } from '@/providers';
 import { isToday, isYesterday } from 'date-fns';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 export default function Transactions() {
-  const [date, setDate] = useState(new Date());
+  const dataContext = useContext(DataContext);
+  const transactions = dataContext.transactions.data;
+
   const totalExpenses = transactions.reduce((acc, transaction) => transaction.value + acc, 0);
 
   const today = transactions.filter((transaction) => isToday(transaction.date));

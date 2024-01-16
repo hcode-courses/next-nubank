@@ -1,4 +1,5 @@
 import { Container } from '@/components/Layout';
+import { DataProvider, ModalsProvider } from '@/providers';
 import '@/styles/fonts.css';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
@@ -20,7 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#8a05be" />
       </head>
       <body>
-        <Container>{children}</Container>
+        <DataProvider>
+          <ModalsProvider>
+            <Container>{children}</Container>
+          </ModalsProvider>
+        </DataProvider>
       </body>
     </html>
   );

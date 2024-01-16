@@ -1,7 +1,14 @@
+'use client';
+
 import { cn } from '@/lib/utils';
+import { ModalsContext } from '@/providers';
+import { useContext } from 'react';
 
 export function ModalsContainer({ children }: React.PropsWithChildren) {
-  const isAnyModalOpen = true;
+  const modalsContext = useContext(ModalsContext);
+  const isAnyModalOpen = modalsContext.data.some((modal) => modal.opened);
+
+  console.log(isAnyModalOpen);
 
   return (
     <div

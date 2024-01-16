@@ -1,5 +1,15 @@
 import { ReactElement } from 'react';
 
+export type DataContextType = {
+  transactions: {
+    data: Transaction[];
+    add: (transaction: Transaction) => void;
+    update: (transactionId: Transaction['id'], newData: Omit<Transaction, 'id'>) => void;
+    delete: (transactionId: Transaction['id']) => void;
+  };
+  categories: Category[];
+};
+
 export type Category = {
   id: number;
   name: string;

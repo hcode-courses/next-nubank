@@ -2,9 +2,10 @@
 
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { cn } from '@/lib/utils';
+import { ModalsContext } from '@/providers';
 import { ElementType } from '@/types';
 import { IconX } from '@tabler/icons-react';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 
 type ModalProps = {
   id: string;
@@ -13,10 +14,11 @@ type ModalProps = {
   React.PropsWithChildren;
 
 export function Modal({ id, title, className, children }: ModalProps) {
+  const modalsContext = useContext(ModalsContext);
   const modalRef = useRef(null);
 
   useClickOutside(modalRef, () => {
-    console.log('fechando modal', id);
+    modalsContext.close(id);
   });
 
   return (
@@ -30,7 +32,7 @@ export function Modal({ id, title, className, children }: ModalProps) {
     >
       <div className="flex flex-row justify-between">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <div className="cursor-pointer" onClick={() => console.log('fechando modal', id)}>
+        <div className="cursor-pointer" onClick={() => modalsContext.close('transaction')}>
           <IconX />
         </div>
       </div>

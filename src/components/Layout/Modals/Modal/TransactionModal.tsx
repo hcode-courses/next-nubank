@@ -1,5 +1,6 @@
 'use client';
 
+import { DeleteTransaction } from '@/components/Actions';
 import { Button, DateInput, NumberInput, Select, TextInput } from '@/components/Elements';
 import { TransactionForm, initialTransactionFormValues } from '@/types/modal.types';
 import { categories } from '@/values/data';
@@ -86,7 +87,7 @@ export function TransactionModal() {
           </div>
         </div>
         <div className="flex flex-row justify-between items-center w-full">
-          {/* <DeleteTransaction /> */}
+          <DeleteTransaction itemId={'1'} className="flex-1" />
 
           <Button className="flex-1" type="submit">
             Salvar

@@ -1,11 +1,14 @@
 'use client';
 import { Button, CreditCard, TransactionList } from '@/components/Elements';
 import { HomeInfoSection } from '@/components/Layout';
-import { transactions } from '@/values/data';
+import { DataContext } from '@/providers';
 import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 export default function Home() {
+  const dataContext = useContext(DataContext);
+  const transactions = dataContext.transactions.data;
+
   const [search, setSearch] = useState('');
 
   return (
