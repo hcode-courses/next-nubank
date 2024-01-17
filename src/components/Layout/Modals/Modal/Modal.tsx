@@ -16,6 +16,9 @@ type ModalProps = {
 export function Modal({ id, title, className, children }: ModalProps) {
   const modalsContext = useContext(ModalsContext);
   const modalRef = useRef(null);
+  const thisModal = modalsContext.data.find((modal) => modal.id === id);
+
+  const isOpen = thisModal?.opened;
 
   useClickOutside(modalRef, () => {
     modalsContext.close(id);
@@ -27,16 +30,17 @@ export function Modal({ id, title, className, children }: ModalProps) {
       data-modal={id}
       className={cn([
         'flex flex-col w-[400px] h-[540px] bg-bg max-w-[80%] max-h-screen rounded-xl px-6 py-8 z-50',
+        isOpen ? 'flex' : 'hidden',
         className,
       ])}
     >
       <div className="flex flex-row justify-between">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <div className="cursor-pointer" onClick={() => modalsContext.close('transaction')}>
+        <div className="cursor-pointer" onClick={() => modalsContext.close(id)}>
           <IconX />
         </div>
       </div>
-      <div>{children}</div>
+      <div className="h-full">{children}</div>
     </div>
   );
 }

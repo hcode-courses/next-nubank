@@ -3,17 +3,17 @@ import { ElementType } from '@/types';
 import { IconTrash } from '@tabler/icons-react';
 import { useContext } from 'react';
 
-export type DeleteTransactionProps = {
-  itemId: string;
+export type DeleteCategoryProps = {
+  itemId: number;
 } & ElementType;
 
-export function DeleteTransaction({ itemId, className }: DeleteTransactionProps) {
+export function DeleteCategory({ itemId, className }: DeleteCategoryProps) {
   const dataContext = useContext(DataContext);
   const modalsContext = useContext(ModalsContext);
 
-  const transactionModal = modalsContext.data.find((modal) => modal.id === 'transaction');
+  const categoryModal = modalsContext.data.find((modal) => modal.id === 'category');
 
-  const transactions = dataContext.transactions;
+  const categories = dataContext.categories;
 
   return (
     <div className={className}>
@@ -22,8 +22,8 @@ export function DeleteTransaction({ itemId, className }: DeleteTransactionProps)
           type="button"
           className="btn btn-square bg-transparent border-primary border-2 hover:bg-primary hover:border-transparent text-primary hover:text-white"
           onClick={() => {
-            transactionModal?.close();
-            transactions.delete(itemId);
+            categoryModal?.close();
+            categories.delete(itemId);
           }}
         >
           <IconTrash size={24} />

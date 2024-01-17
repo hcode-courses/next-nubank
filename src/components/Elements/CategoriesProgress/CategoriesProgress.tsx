@@ -1,6 +1,6 @@
-import { getCategoryItems } from '@/lib/categories';
+import { getCategoryIcon, getCategoryItems } from '@/lib/categories';
 import { cn } from '@/lib/utils';
-import { DataContext } from '@/providers';
+import { DataContext, ModalsContext } from '@/providers';
 import { Category, ElementType } from '@/types';
 import { useContext } from 'react';
 import { Button, Progress } from '..';
@@ -11,7 +11,10 @@ type CategoryProps = {
 
 function Category({ color, id, name, icon, totalExpenses }: CategoryProps) {
   const dataContext = useContext(DataContext);
+  const modalsContext = useContext(ModalsContext);
+
   const transactions = dataContext.transactions.data;
+  const category = { id, name, color, icon };
 
   const categoryTransactions = getCategoryItems(id, transactions);
   const totalCategoryExpenses = categoryTransactions.reduce(
@@ -20,8 +23,11 @@ function Category({ color, id, name, icon, totalExpenses }: CategoryProps) {
   );
 
   return (
-    <div className={cn([`flex flex-row mb-3`, color])}>
-      {icon}
+    <div
+      onClick={() => modalsContext.openUpdate('category', category)}
+      className={cn([`flex flex-row mb-3 cursor-pointer`, color])}
+    >
+      {getCategoryIcon(icon, dataContext.categories.data)}
       <span className="ml-4 font-medium w-20 text-text">{name}</span>
       <span className="font-medium">
         {Math.round((totalCategoryExpenses / totalExpenses) * 100)} %
@@ -33,7 +39,7 @@ function Category({ color, id, name, icon, totalExpenses }: CategoryProps) {
 export function CategoriesProgress({ className }: ElementType) {
   const dataContext = useContext(DataContext);
   const transactions = dataContext.transactions.data;
-  const categories = dataContext.categories;
+  const categories = dataContext.categories.data;
 
   let totalExpenses = transactions.reduce((acc, transaction) => transaction.value + acc, 0);
   let infoIteration = totalExpenses / 4;

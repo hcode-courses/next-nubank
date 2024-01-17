@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { Header, ModalsContainer, Navbar, TransactionModal } from '..';
+import { Header, ModalsContainer, Navbar } from '..';
 
 type ContainerProps = {
   children: ReactNode;
@@ -15,9 +15,7 @@ export function Container({ children }: ContainerProps) {
       <Navbar opened={opened} setOpened={setOpened} />
       <Header setOpened={setOpened} />
       <main className="max-w-[1600px] md:pl-[300px] w-full min-h-screen mx-auto">{children}</main>
-      <ModalsContainer>
-        <TransactionModal />
-      </ModalsContainer>
+      <ModalsContainer />
     </div>
   );
 }

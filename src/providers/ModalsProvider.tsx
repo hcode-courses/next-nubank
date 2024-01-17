@@ -1,6 +1,7 @@
 'use client';
 
-import { Modal, ModalsContextType, initialTransactionFormValues } from '@/types/modal.types';
+import { Modal, ModalsContextType } from '@/types/modal.types';
+import { initialCategoryFormValues, initialTransactionFormValues } from '@/values/data';
 import { createContext, useState } from 'react';
 
 export const ModalsContext = createContext({} as ModalsContextType);
@@ -9,6 +10,10 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
   const [transactionOpened, setTransactionOpened] = useState(false);
   const [transactionFormData, setTransactionFormData] = useState(initialTransactionFormValues);
   const [transactionAction, setTransactionAction] = useState<Modal['action']>('create');
+
+  const [categoryOpened, setCategoryOpened] = useState(false);
+  const [categoryFormData, setCategoryFormData] = useState(initialCategoryFormValues);
+  const [categoryAction, setCategoryAction] = useState<Modal['action']>('create');
 
   const modals: Modal[] = [
     {
@@ -24,6 +29,20 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
       setData: setTransactionFormData,
       action: transactionAction,
       setAction: setTransactionAction,
+    },
+    {
+      id: 'category',
+      opened: categoryOpened,
+      open: () => setCategoryOpened(true),
+      close: () => {
+        setCategoryOpened(false);
+        setCategoryFormData(initialCategoryFormValues);
+        setCategoryAction('create');
+      },
+      data: categoryFormData,
+      setData: setCategoryFormData,
+      action: categoryAction,
+      setAction: setCategoryAction,
     },
   ];
 

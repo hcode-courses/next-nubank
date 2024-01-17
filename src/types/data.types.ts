@@ -1,20 +1,20 @@
-import { ReactElement } from 'react';
-
 export type DataContextType = {
-  transactions: {
-    data: Transaction[];
-    add: (transaction: Transaction) => void;
-    update: (transactionId: Transaction['id'], newData: Omit<Transaction, 'id'>) => void;
-    delete: (transactionId: Transaction['id']) => void;
-  };
-  categories: Category[];
+  transactions: CRUD<Transaction>;
+  categories: CRUD<Category>;
+};
+
+type CRUD<T extends Category | Transaction> = {
+  data: T[];
+  add: (value: T) => void;
+  update: (id: T['id'], values: Omit<T, 'id'>) => void;
+  delete: (id: T['id']) => void;
 };
 
 export type Category = {
   id: number;
   name: string;
   color: string;
-  icon: ReactElement;
+  icon: string;
 };
 
 export type Transaction = {

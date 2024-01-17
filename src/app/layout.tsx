@@ -3,6 +3,7 @@ import { DataProvider, ModalsProvider } from '@/providers';
 import '@/styles/fonts.css';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const metadata: Metadata = {
   title: 'Nubank',

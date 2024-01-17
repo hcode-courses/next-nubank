@@ -26,7 +26,7 @@ export function Select({ items, active, setActive, className }: SelectProps) {
       value={active}
       onChange={(e) => setActive(e.target.value)}
       className={cn([
-        'select select-sm w-full flex max-w-xs bg-transparent text-primary border-primary border-2 font-medium rounded-full',
+        'select select-sm w-full flex bg-transparent text-primary border-primary border-2 font-medium rounded-full',
         className,
       ])}
     >

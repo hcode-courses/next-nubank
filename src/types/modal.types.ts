@@ -1,3 +1,5 @@
+import { initialCategoryFormValues, initialTransactionFormValues } from '@/values/data';
+
 export type Modal = {
   id: string;
   opened: boolean;
@@ -16,12 +18,5 @@ export type ModalsContextType = {
   openUpdate: (id: string, data: any) => void;
 };
 
-export const initialTransactionFormValues = {
-  name: '',
-  date: new Date(),
-  value: 0,
-  type: 'pix',
-  categoryId: 0,
-};
-
 export type TransactionForm = typeof initialTransactionFormValues;
+export type CategoryForm = typeof initialCategoryFormValues;

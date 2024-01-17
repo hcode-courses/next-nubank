@@ -2,9 +2,11 @@
 
 import { DeleteTransaction } from '@/components/Actions';
 import { Button, DateInput, NumberInput, Select, TextInput } from '@/components/Elements';
-import { TransactionForm, initialTransactionFormValues } from '@/types/modal.types';
-import { categories } from '@/values/data';
-import { useState } from 'react';
+import { uuid } from '@/lib/utils';
+import { DataContext, ModalsContext } from '@/providers';
+import { TransactionForm } from '@/types/modal.types';
+import { initialTransactionFormValues } from '@/values/data';
+import { useContext, useEffect, useState } from 'react';
 import { Modal } from '.';
 
 const paymentMethods = [
@@ -23,21 +25,48 @@ const paymentMethods = [
 ];
 
 export function TransactionModal() {
+  const dataContext = useContext(DataContext);
+  const modalsContext = useContext(ModalsContext);
+  const transactionModal = modalsContext.data.find((modal) => modal.id === 'transaction');
+
+  const categories = dataContext.categories.data;
   const [form, setForm] = useState<TransactionForm>(initialTransactionFormValues);
 
   const handleSubmit = (values: TransactionForm) => {
-    console.log('valores enviados', values);
+    if (transactionModal?.action === 'create') {
+      const transaction = {
+        id: uuid(),
+        ...values,
+      };
+
+      dataContext.transactions.add(transaction);
+    }
+
+    if (transactionModal?.action === 'update') {
+      const id = transactionModal.data.id;
+
+      dataContext.transactions.update(id, values);
+    }
+
+    transactionModal?.close();
   };
 
   const changeFormValue = (field: keyof TransactionForm, newValue: any) => {
     setForm((form) => ({ ...form, [field]: newValue }));
   };
 
+  useEffect(() => {
+    setForm(transactionModal?.data);
+  }, [transactionModal?.data]);
+
   return (
     <Modal title="Transação" id="transaction">
       <form
         className="mt-5 flex flex-col justify-between h-full"
-        onSubmit={(e) => handleSubmit(form)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(form);
+        }}
       >
         <div>
           <div className="mb-5">
@@ -68,7 +97,6 @@ export function TransactionModal() {
                 }))}
                 active={form.categoryId}
                 setActive={(newValue: number) => changeFormValue('categoryId', Number(newValue))}
-                wrapperClassName="w-full"
               />
             </div>
             <div className="flex-1">
@@ -77,7 +105,6 @@ export function TransactionModal() {
                 items={paymentMethods}
                 active={form.type}
                 setActive={(newValue: string) => changeFormValue('type', newValue)}
-                wrapperClassName="w-full"
               />
             </div>
           </div>
@@ -87,8 +114,9 @@ export function TransactionModal() {
           </div>
         </div>
         <div className="flex flex-row justify-between items-center w-full">
-          <DeleteTransaction itemId={'1'} className="flex-1" />
-
+          {transactionModal?.action === 'update' && (
+            <DeleteTransaction itemId={transactionModal?.data.id} className="flex-1" />
+          )}
           <Button className="flex-1" type="submit">
             Salvar
           </Button>
