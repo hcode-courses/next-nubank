@@ -26,7 +26,6 @@ export function DataProvider({ children }: React.PropsWithChildren) {
         ...newData,
       };
 
-      console.log(updatedTransaction);
       return [...otherTransactions, updatedTransaction];
     });
   };
@@ -58,8 +57,6 @@ export function DataProvider({ children }: React.PropsWithChildren) {
     const categoryTransactions = transactions.filter(
       (transaction) => transaction.categoryId === categoryId
     );
-
-    console.log(categoryTransactions);
 
     categoryTransactions.forEach((transaction) => {
       const nextCategoryId = categories[0].id === categoryId ? categories[1].id : categories[0].id;

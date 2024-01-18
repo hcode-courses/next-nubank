@@ -10,7 +10,7 @@ export type TransactionItemProps = {
 
 export function TransactionItem({ data }: TransactionItemProps) {
   const dataContext = useContext(DataContext);
-  const category = getCategoryById(data.categoryId, dataContext.categories);
+  const category = getCategoryById(data.categoryId, dataContext.categories.data);
 
   return (
     <div className="relative flex flex-row flex-wrap w-full items-center justify-between">
