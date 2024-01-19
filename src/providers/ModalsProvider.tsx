@@ -2,7 +2,9 @@
 
 import { Modal, ModalsContextType } from '@/types/modal.types';
 import { initialCategoryFormValues, initialTransactionFormValues } from '@/values/data';
+import ptBR from 'date-fns/locale/pt-BR';
 import { createContext, useState } from 'react';
+import { registerLocale } from 'react-datepicker';
 
 export const ModalsContext = createContext({} as ModalsContextType);
 
@@ -78,6 +80,8 @@ export function ModalsProvider({ children }: React.PropsWithChildren) {
     close: closeModal,
     openUpdate: openUpdateModal,
   };
+
+  registerLocale('ptBR', ptBR);
 
   return <ModalsContext.Provider value={data}>{children}</ModalsContext.Provider>;
 }

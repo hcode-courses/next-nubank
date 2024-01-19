@@ -1,7 +1,6 @@
 import { getCategoryById, getCategoryIcon } from '@/lib/categories';
-import { ModalsContext } from '@/providers';
+import { DataContext, ModalsContext } from '@/providers';
 import { Transaction } from '@/types';
-import { categories } from '@/values/data';
 import { format } from 'date-fns';
 import { useContext } from 'react';
 
@@ -11,6 +10,8 @@ type TransactionItemProps = {
 
 export function TransactionItem({ data }: TransactionItemProps) {
   const modalsContext = useContext(ModalsContext);
+  const dataContext = useContext(DataContext);
+  const categories = dataContext.categories.data;
   const category = getCategoryById(data.categoryId, categories);
 
   return (

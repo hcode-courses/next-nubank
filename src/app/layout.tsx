@@ -3,7 +3,9 @@ import { DataProvider, ModalsProvider } from '@/providers';
 import '@/styles/fonts.css';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import Loading from './loading';
 
 export const metadata: Metadata = {
   title: 'Nubank',
@@ -24,7 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <DataProvider>
           <ModalsProvider>
-            <Container>{children}</Container>
+            <Suspense fallback={<Loading />}>
+              <Container>{children}</Container>
+            </Suspense>
           </ModalsProvider>
         </DataProvider>
       </body>

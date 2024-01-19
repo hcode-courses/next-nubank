@@ -9,7 +9,7 @@ type CreditCardsProps = {
   brand: string;
 } & ElementType;
 
-export function CreditCard({ name, brand, className }: CreditCardsProps) {
+export function CreditCard({ name, brand, logo, className }: CreditCardsProps) {
   return (
     <div
       className={cn([
@@ -18,7 +18,13 @@ export function CreditCard({ name, brand, className }: CreditCardsProps) {
       ])}
     >
       <div className="absolute top-6 right-6">
-        <img className="h-8" src={brand} alt="Card Brand" />
+        <Image
+          width={50}
+          height={50}
+          style={{ width: '50px', height: '50px' }}
+          src={brand}
+          alt="Card Brand"
+        />
       </div>
       <div className="mt-12">
         <div className="flex flex-row mb-2">
@@ -26,7 +32,13 @@ export function CreditCard({ name, brand, className }: CreditCardsProps) {
           <IconWifi2 style={{ rotate: '90deg' }} size="40" />
         </div>
         <div className="flex flex-row items-center">
-          <Image src="/icons/nubank_logo.svg" width={40} height={40} alt="Hcode Logo" />
+          <Image
+            src={logo}
+            width={40}
+            height={40}
+            style={{ width: '40px', height: '40px' }}
+            alt="Hcode Logo"
+          />
           <span className="ml-4">{name}</span>
         </div>
       </div>

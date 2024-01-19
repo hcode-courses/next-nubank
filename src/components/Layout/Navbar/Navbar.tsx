@@ -81,13 +81,14 @@ export function Navbar({ opened, setOpened }: NavbarProps) {
       </div>
       <div className="flex flex-col items-center p-4 text-sm">
         <Image
+          style={{ width: '70px', height: '70px' }}
           width={70}
           height={70}
           src="/icons/nubank_logo.svg"
           alt="Logo Nubank"
-          className="mb-4"
+          priority
         />
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-4">
           <span>&#169; 2023 Nubank Hcode</span>
           <span>Todos os direitos reservados</span>
         </div>
